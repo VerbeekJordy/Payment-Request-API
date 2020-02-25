@@ -1,5 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {GiftService} from '../../services/gift.service';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Gift} from '../../models/gift.model';
 
 @Component({
@@ -8,7 +7,9 @@ import {Gift} from '../../models/gift.model';
   styleUrls: ['./gift-item.component.css']
 })
 export class GiftItemComponent implements OnInit {
- @Input() gift: Gift;
+  @Input() gift: Gift;
+  @Output() childValueChange = new EventEmitter();
+
   constructor() {
   }
 
@@ -17,6 +18,7 @@ export class GiftItemComponent implements OnInit {
 
   buttonClicked(gift: Gift) {
     gift.stock = gift.stock - 1;
+    this.childValueChange.emit(gift);
   }
 
   layout(gift: Gift) {

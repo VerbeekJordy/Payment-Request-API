@@ -5,7 +5,7 @@ import { InMemoryDbService } from 'angular-in-memory-web-api';
 @Injectable()
 export class InmemoryDataService implements InMemoryDbService {
 
-    constructor() { }
+  constructor() { }
 
     createDb() {
         const gifts = [
@@ -20,7 +20,7 @@ export class InmemoryDataService implements InMemoryDbService {
           // tslint:disable-next-line:max-line-length
             {description: 'Desktop', thumbnail: 'https://www.lenovo.com/medias/lenovo-desktop-v530s-tower-hero.png?context=bWFzdGVyfHJvb3R8MTg3Mzk5fGltYWdlL3BuZ3xoY2UvaDNlLzEwNjI4MjkwNDEyNTc0LnBuZ3w3OGZkODhlMTI1ODFlZGI1OTQzMmMzZWFkY2QzMWJlYjVmZmE3ZTFjZmY5YTM0YTBmNzhkZGE0NWRmMjkxNDRh', price: '499', stock: 10, id: 5},
           // tslint:disable-next-line:max-line-length
-            {description: 't-shirt', thumbnail: 'https://cdn.reshift.nl/media/media/thumbnails/640/20160908155129606824949579042/c3583fq-bs_front_to_right_72dpi_rgb.jpg', price: '110', stock: 2, id: 6}
+            {description: 'Monitor', thumbnail: 'https://cdn.reshift.nl/media/media/thumbnails/640/20160908155129606824949579042/c3583fq-bs_front_to_right_72dpi_rgb.jpg', price: '110', stock: 2, id: 6}
         ];
 
         return { gifts };

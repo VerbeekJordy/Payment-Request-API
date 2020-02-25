@@ -1,8 +1,8 @@
-<div class="wrapper" *ngIf="gifts.length != 0">
+<div class="wrapper" *ngIf="gifts.length !== 0">
   <h1>Cart</h1>
   <table class="tg">
     <tr *ngFor="let gift of gifts">
-      <th>test</th>
+      <th>{{gift.description}} prijs: {{gift.price}} </th>
       <button (click)="removeItemFromCart(gift)">Remove</button>
     </tr>
   </table>

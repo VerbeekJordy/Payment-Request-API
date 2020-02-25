@@ -1,6 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Gift} from '../../models/gift.model';
-import {GiftService} from '../../services/gift.service';
 
 @Component({
   selector: 'app-cart',
@@ -8,14 +7,14 @@ import {GiftService} from '../../services/gift.service';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  gifts: Array<Gift>;
+  @Input() gifts: Array<Gift>;
   count: number;
 
-  constructor(private service: GiftService) {
+
+  constructor() {
   }
 
   ngOnInit() {
-    this.service.getGifts('').subscribe(data => this.gifts = data);
   }
 
   removeItemFromCart(gift: Gift) {
