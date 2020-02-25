@@ -1,0 +1,9 @@
+:host{
+    display: block;
+}
+input{
+    padding: 8px;
+    width: calc(100% - 16px);
+    display: block;
+    margin: 12px 8px;
+}
