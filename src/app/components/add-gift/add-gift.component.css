@@ -1,0 +1,22 @@
+form{
+    display: block;
+    width: 75%;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 20px 18px;
+}
+
+label, input, select{
+    display: block;
+    padding: 5px;
+    margin: 2px;
+}
+
+.message{
+    width: 100%;
+}
+
+select{
+    width: 280px;
+    margin-bottom: 20px;
+}

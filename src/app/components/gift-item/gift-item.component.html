@@ -1,0 +1,13 @@
+<div class="card">
+  <figure>
+    <img [src]="gift.thumbnail" alt="Avatar" style="width:100%">
+  </figure>
+  <div class="container">
+    <h4 [ngStyle]="layout(gift)"><b>{{gift.description}} - (beschikbaar: {{gift.stock}})</b></h4>
+    <p>
+      Kostprijs: {{gift.price}} <br/>
+      Categorie: {{gift.category}}
+    </p>
+  </div>
+  <button (click)="buttonClicked(gift)" *ngIf="gift.stock != 0">Voeg toe aan je winkelmandje</button>
+</div>
