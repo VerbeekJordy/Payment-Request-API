@@ -1,0 +1,9 @@
+.wrapper{
+  width:  100px;
+  margin: auto;
+  padding: 0px;
+}
+#submitButton{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}

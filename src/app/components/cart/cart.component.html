@@ -1,0 +1,10 @@
+<div class="wrapper" *ngIf="gifts.length != 0">
+  <h1>Cart</h1>
+  <table class="tg">
+    <tr *ngFor="let gift of gifts">
+      <th>test</th>
+      <button (click)="removeItemFromCart(gift)">Remove</button>
+    </tr>
+  </table>
+  <button id="submitButton">Betalen</button>
+</div>
