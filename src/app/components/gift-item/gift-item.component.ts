@@ -17,13 +17,6 @@ export class GiftItemComponent implements OnInit {
   }
 
   buttonClicked(gift: Gift) {
-    gift.stock = gift.stock - 1;
     this.childValueChange.emit(gift);
-  }
-
-  layout(gift: Gift) {
-    if (gift.stock === 0) {
-      return {color: 'red'};
-    }
   }
 }

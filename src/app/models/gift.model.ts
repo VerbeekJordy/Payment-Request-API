@@ -2,7 +2,7 @@ export class Gift {
   description: string;
   category: string;
   thumbnail: string;
-  points: string;
+  price: number;
   stock: number;
   id: number;
 }
