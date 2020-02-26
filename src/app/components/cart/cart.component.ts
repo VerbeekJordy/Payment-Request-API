@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Gift} from '../../models/gift.model';
-import {isBoolean, isString} from 'util';
+import {isBoolean, isNumber, isString} from 'util';
 import {NgForOf} from '@angular/common';
 
 @Component({
@@ -11,21 +11,23 @@ import {NgForOf} from '@angular/common';
 export class CartComponent implements OnInit {
   @Input() gifts: Array<Gift>;
   count: number;
-  total: number;
+  total = 0;
+  paymentBasket = [];
 
   constructor() {
   }
 
   ngOnInit() {
-    for (const val of  this.gifts) {
-    }
   }
 
   payButtonClicked() {
-    let request = initPaymentRequest();
+    if ((window as any).PaymentRequest) {
 
-    onBuyClicked(request);
-    request = initPaymentRequest();
+      const request = this.initPaymentRequest();
+
+      this.onBuyClicked(request);
+      this.initPaymentRequest();
+    }
   }
 
   removeItemFromCart(gift: Gift) {
@@ -36,79 +38,134 @@ export class CartComponent implements OnInit {
     this.gifts.splice(this.count, 1);
   }
 
-
-}
-
-function initPaymentRequest() {
-  const networks = ['amex', 'diners', 'discover', 'jcb', 'mastercard', 'unionpay',
-    'visa', 'mir', 'maestro'];
-  const types = ['debit', 'credit', 'prepaid'];
-  const supportedInstruments = [{
-    supportedMethods: 'basic-card',
-    data: {supportedNetworks: networks, supportedTypes: types},
-  }];
-
-
-  const details = {
-    total: {label: 'Total', amount: {currency: 'EUR', value: '55.00'}},
-    displayItems: [
-      {
-        label: 'Original donation amount',
-        amount: {currency: 'EUR', value: '65.00'},
-      },
-      {
-        label: 'Friends and family discount',
-        amount: {currency: 'EUR', value: '-10.00'},
-      },
-    ],
-  };
-
-  const options = {
-    requestPayerName: true,
-    requestPayerPhone: true,
-    requestPayerEmail: true,
-  };
-
-  return new PaymentRequest(supportedInstruments, details, options);
-}
-
-function onBuyClicked(request) {
-  request.show().then((instrumentResponse) => {
-    sendPaymentToServer(instrumentResponse);
-  })
-    .catch((err) => {
-
-    });
-}
-
-function sendPaymentToServer(instrumentResponse) {
-  // There's no server-side component of these samples. No transactions are
-  // processed and no money exchanged hands. Instantaneous transactions are not
-  // realistic. Add a 2 second delay to make it seem more real.
-  window.setTimeout(() => {
-    instrumentResponse.complete('success')
-      .then(() => {
-        document.getElementById('result').innerHTML =
-          instrumentToJsonString(instrumentResponse);
-      })
-      .catch((err) => {
-
+  creatingBasketItems() {
+    for (const item of this.gifts) {
+      this.total = +this.total + +item.price;
+      this.paymentBasket.push({
+        label: item.description + '',
+        amount: {currency: 'EUR', value: item.price + ''},
       });
-  }, 2000);
-}
+    }
+  }
 
-function instrumentToJsonString(instrument) {
-  const details = instrument.details;
-  details.cardNumber = 'XXXX-XXXX-XXXX-' + details.cardNumber.substr(12);
-  details.cardSecurityCode = '***';
+  initPaymentRequest() {
+    const networks = ['amex', 'diners', 'discover', 'jcb', 'mastercard', 'unionpay',
+      'visa', 'mir', 'maestro'];
+    const types = ['debit', 'credit', 'prepaid'];
+    const supportedInstruments = [{
+      supportedMethods: 'basic-card',
+      data: {supportedNetworks: networks, supportedTypes: types},
+    }];
 
-  return JSON.stringify({
-    methodName: instrument.methodName,
-    details,
-    payerName: instrument.payerName,
-    payerPhone: instrument.payerPhone,
-    payerEmail: instrument.payerEmail,
-  }, undefined, 2);
+    this.creatingBasketItems();
+
+    const details = {
+      total: {label: 'Total', amount: {currency: 'EUR', value: this.total + ''}},
+      displayItems: this.paymentBasket,
+      shippingOptions: [
+        {
+          id: 'standard',
+          label: 'Standard shipping',
+          amount: {currency: 'EUR', value: '0.00'},
+          selected: true
+        },
+        {
+          id: 'payed',
+          label: 'Payed shipping',
+          amount: {currency: 'EUR', value: '8.00'},
+          selected: false
+        }
+      ]
+    };
+
+    const options = {
+      requestPayerName: true,
+      requestPayerPhone: true,
+      requestPayerEmail: true,
+      requestShipping: true
+    };
+
+    const paymentRequest = new PaymentRequest(supportedInstruments, details, options);
+
+    paymentRequest.addEventListener(
+      'shippingoptionchange',
+      (event) => this.onShippingOptionChange(event, details)
+    );
+
+    return paymentRequest;
+  }
+
+  updateDetails({details, shippingOption, resolve, reject}: { details: any, shippingOption: any, resolve: any, reject: any }) {
+    let selectedShippingOption;
+    let otherShippingOption;
+    if (shippingOption === 'standard') {
+      selectedShippingOption = details.shippingOptions[0];
+      otherShippingOption = details.shippingOptions[1];
+      details.total.amount.value = '55.00';
+    } else if (shippingOption === 'express') {
+      selectedShippingOption = details.shippingOptions[1];
+      otherShippingOption = details.shippingOptions[0];
+      details.total.amount.value = '67.00';
+    } else {
+      reject('Unknown shipping option \'' + shippingOption + '\'');
+      return;
+    }
+    selectedShippingOption.selected = true;
+    otherShippingOption.selected = false;
+    details.displayItems.splice(2, 1, selectedShippingOption);
+    resolve(details);
+  }
+
+  onShippingOptionChange(event, previousDetails) {
+    const paymentRequest = event.target;
+    console.log(`Received a 'shippingoptionchange' event, change to: `,
+      paymentRequest.shippingOption);
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < previousDetails.shippingOptions.length; i++) {
+      const shippingOption = previousDetails.shippingOptions[i];
+      shippingOption.selected =
+        shippingOption.id === paymentRequest.shippingOption;
+    }
+
+    event.updateWith(previousDetails);
+  }
+
+  onBuyClicked(request) {
+    request.canMakePayment(request.show().then((instrumentResponse) => {
+      this.sendPaymentToServer(instrumentResponse);
+    })
+      .catch((err) => {
+        window.alert('' + err);
+      }));
+  }
+
+  sendPaymentToServer(instrumentResponse) {
+    window.setTimeout(() => {
+      instrumentResponse.complete('success')
+        .then(() => {
+          document.getElementById('result').innerHTML =
+            this.instrumentToJsonString(instrumentResponse);
+        })
+        .catch((err) => {
+
+        });
+    }, 2000);
+    console.log('Betaald');
+  }
+
+  instrumentToJsonString(instrument) {
+    const details = instrument.details;
+    details.cardNumber = 'XXXX-XXXX-XXXX-' + details.cardNumber.substr(12);
+    details.cardSecurityCode = '***';
+
+    return JSON.stringify({
+      methodName: instrument.methodName,
+      details,
+      payerName: instrument.payerName,
+      payerPhone: instrument.payerPhone,
+      payerEmail: instrument.payerEmail,
+    }, undefined, 2);
+  }
 }
 
 

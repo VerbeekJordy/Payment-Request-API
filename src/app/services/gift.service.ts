@@ -3,7 +3,6 @@ import {catchError, map, tap} from 'rxjs/operators';
 import {Observable, throwError} from 'rxjs';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Gift} from '../models/gift.model';
-import {Category} from '../models/category.model';
 
 @Injectable({providedIn: 'root'})
 export class GiftService {
@@ -58,7 +57,7 @@ export class GiftService {
   deleteGift(gift: Gift): Observable<any> {
     return this.http.delete(this.eventUrl1 + '/' + gift.id);
   }
-  
+
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

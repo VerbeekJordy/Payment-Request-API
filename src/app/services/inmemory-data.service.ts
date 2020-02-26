@@ -14,7 +14,7 @@ export class InmemoryDataService implements InMemoryDbService {
           // tslint:disable-next-line:max-line-length
             {description: '1 HP laptop', thumbnail: 'https://be02.cp-static.com/objects/multimedia/e/e6b/1969259_83224127_laptops-hp-pavilion-x360-14-cd0216nb-4mj56ea.jpg', price: '599', stock: 4, id: 2},
           // tslint:disable-next-line:max-line-length
-            {description: 'Laptop + muis', thumbnail: 'https://s.s-bol.com/imgbase0/imagebase3/large/FC/2/3/3/4/9200000112994332.jpg', price: '30', stock: 16, id: 3},
+            {description: 'Laptop + muis', thumbnail: 'https://s.s-bol.com/imgbase0/imagebase3/large/FC/2/3/3/4/9200000112994332.jpg', price: '0.01', stock: 16, id: 3},
           // tslint:disable-next-line:max-line-length
             {description: 'Headset', thumbnail: 'https://gamemania-sec.azureedge.net/-/media/Sites/GameMania/Products/Accessories/Headsets/TURTLE-BEACH/Multiplatform-Turtle-Beach-Ear-Force-Recon-50P-Headset/Screenshots/Recon50P03.jpg?v=fnmFC5LSW0S6czP7dVpm+Q&Type=Small', price: '89', stock: 16, id: 4},
           // tslint:disable-next-line:max-line-length
