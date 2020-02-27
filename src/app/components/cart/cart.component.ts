@@ -27,6 +27,8 @@ export class CartComponent implements OnInit {
 
       this.onBuyClicked(request);
       this.initPaymentRequest();
+    } else {
+      this.router.navigateByUrl('/checkout');
     }
   }
 

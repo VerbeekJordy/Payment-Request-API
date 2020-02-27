@@ -13,6 +13,7 @@ import { FilterComponent } from './components/filter/filter.component';
 import {FormsModule} from '@angular/forms';
 import { CartComponent } from './components/cart/cart.component';
 import { ConfirmPaymentComponent } from './components/confirm-payment/confirm-payment.component';
+import { RegularCheckoutComponent } from './components/regular-checkout/regular-checkout.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ConfirmPaymentComponent } from './components/confirm-payment/confirm-pa
     GiftItemComponent,
     FilterComponent,
     CartComponent,
-    ConfirmPaymentComponent
+    ConfirmPaymentComponent,
+    RegularCheckoutComponent
   ],
   imports: [
     BrowserModule,
