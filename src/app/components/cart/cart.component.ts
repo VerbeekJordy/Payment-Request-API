@@ -22,9 +22,7 @@ export class CartComponent implements OnInit {
 
   payButtonClicked() {
     if ((window as any).PaymentRequest) {
-
       const request = this.initPaymentRequest();
-
       this.onBuyClicked(request);
       this.initPaymentRequest();
     } else {
@@ -48,11 +46,15 @@ export class CartComponent implements OnInit {
         amount: {currency: 'EUR', value: item.price + ''},
       });
     }
+    this.paymentBasket.push({
+      label: 'Free shipping',
+      amount: {currency: 'EUR', value: '0.00'}
+    });
   }
 
   initPaymentRequest() {
     const networks = ['amex', 'diners', 'discover', 'jcb', 'mastercard', 'unionpay',
-      'visa', 'mir', 'maestro'];
+      'visa', 'mir'];
     const types = ['debit', 'credit', 'prepaid'];
     const supportedInstruments = [{
       supportedMethods: 'basic-card',
@@ -97,39 +99,37 @@ export class CartComponent implements OnInit {
     return paymentRequest;
   }
 
-  updateDetails({details, shippingOption, resolve, reject}: { details: any, shippingOption: any, resolve: any, reject: any }) {
-    let selectedShippingOption;
-    let otherShippingOption;
-    if (shippingOption === 'standard') {
-      selectedShippingOption = details.shippingOptions[0];
-      otherShippingOption = details.shippingOptions[1];
-      details.total.amount.value = '55.00';
-    } else if (shippingOption === 'express') {
-      selectedShippingOption = details.shippingOptions[1];
-      otherShippingOption = details.shippingOptions[0];
-      details.total.amount.value = '67.00';
-    } else {
-      reject('Unknown shipping option \'' + shippingOption + '\'');
-      return;
-    }
-    selectedShippingOption.selected = true;
-    otherShippingOption.selected = false;
-    details.displayItems.splice(2, 1, selectedShippingOption);
-    resolve(details);
-  }
-
   onShippingOptionChange(event, previousDetails) {
     const paymentRequest = event.target;
+    let shippingOption;
     console.log(`Received a 'shippingoptionchange' event, change to: `,
       paymentRequest.shippingOption);
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < previousDetails.shippingOptions.length; i++) {
-      const shippingOption = previousDetails.shippingOptions[i];
+      shippingOption = previousDetails.shippingOptions[i];
       shippingOption.selected =
         shippingOption.id === paymentRequest.shippingOption;
     }
 
-    // previousDetails = previousDetails.displayItems.splice(1, 1, previousDetails.shippingOptions[0]);
+
+    let selectedShippingOption;
+
+    if (paymentRequest.shippingOption === 'free') {
+      previousDetails.total.amount.value = +previousDetails.total.amount.value - 7.99;
+      console.log('free test');
+      selectedShippingOption = {
+        label: 'Free shipping',
+        amount: {currency: 'EUR', value: '0.00'}
+      };
+    } else if (paymentRequest.shippingOption === 'premium') {
+      previousDetails.total.amount.value = +previousDetails.total.amount.value + 7.99;
+      selectedShippingOption = {
+        label: 'Premium shipping',
+        amount: {currency: 'EUR', value: '7.99'}
+      };
+    }
+
+    previousDetails.displayItems.splice(this.gifts.length, this.paymentBasket.length, selectedShippingOption);
     event.updateWith(previousDetails);
   }
 
@@ -139,6 +139,8 @@ export class CartComponent implements OnInit {
         this.sendPaymentToServer(instrumentResponse);
       })
         .catch((err) => {
+          this.paymentBasket.splice(0);
+          this.total = 0;
           window.alert('' + err);
         });
     }
