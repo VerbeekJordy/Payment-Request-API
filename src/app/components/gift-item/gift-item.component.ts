@@ -11,12 +11,19 @@ import {Router} from '@angular/router';
 export class GiftItemComponent implements OnInit {
   @Input() gift: Gift;
   @Output() childValueChange = new EventEmitter();
-  test: CartComponent;
+  cartComponent: CartComponent;
+  test = (window as any).PaymentRequest;
+  width: number;
 
   constructor(private router: Router) {
   }
 
   ngOnInit() {
+    if (this.test) {
+      this.width = 80;
+    } else {
+      this.width = 100;
+    }
   }
 
   buttonClicked(gift: Gift) {
@@ -24,9 +31,9 @@ export class GiftItemComponent implements OnInit {
   }
 
   quickBuyClicked(gift: Gift) {
-    this.test = new CartComponent(this.router);
-    this.test.gifts = [];
-    this.test.gifts.push(gift);
-    this.test.payButtonClicked();
+    this.cartComponent = new CartComponent(this.router);
+    this.cartComponent.gifts = [];
+    this.cartComponent.gifts.push(gift);
+    this.cartComponent.payButtonClicked();
   }
 }
