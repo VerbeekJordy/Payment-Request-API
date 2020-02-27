@@ -12,6 +12,7 @@ import { GiftItemComponent } from './components/gift-item/gift-item.component';
 import { FilterComponent } from './components/filter/filter.component';
 import {FormsModule} from '@angular/forms';
 import { CartComponent } from './components/cart/cart.component';
+import { ConfirmPaymentComponent } from './components/confirm-payment/confirm-payment.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { CartComponent } from './components/cart/cart.component';
     GiftListComponent,
     GiftItemComponent,
     FilterComponent,
-    CartComponent
+    CartComponent,
+    ConfirmPaymentComponent
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,7 @@ import {Gift} from '../../models/gift.model';
 })
 export class GiftListComponent implements OnInit {
   gifts: Array<Gift>;
+  cartItems: Array<Gift> = [];
 
   constructor(private service: GiftService) {
   }
@@ -20,5 +21,9 @@ export class GiftListComponent implements OnInit {
   eventSearch(event: string) {
     console.log(event);
     this.service.getGifts(event).subscribe(data => this.gifts = data);
+  }
+
+  eventParent(event: Gift) {
+    this.cartItems.push(event);
   }
 }
