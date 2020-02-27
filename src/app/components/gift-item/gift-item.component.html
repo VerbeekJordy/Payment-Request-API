@@ -8,5 +8,6 @@
       Kostprijs: {{gift.price}} <br/>
     </p>
   </div>
-  <button (click)="buttonClicked(gift)" *ngIf="gift.stock != 0">Voeg toe aan je winkelmandje</button>
+  <button class="add" (click)="buttonClicked(gift)">Voeg toe aan je winkelmandje</button>
+  <button class="buyNow" (click)="appel(gift)">Buy now</button>
 </div>
