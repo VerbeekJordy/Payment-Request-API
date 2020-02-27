@@ -15,9 +15,6 @@ export class CartComponent implements OnInit {
   paymentBasket = [];
 
   constructor(private router: Router) {
-    this.router.routeReuseStrategy.shouldReuseRoute = () => {
-      return false;
-    };
   }
 
   ngOnInit() {
@@ -153,9 +150,11 @@ export class CartComponent implements OnInit {
         })
         .catch((err) => {
 
-        }).finally([this.router.navigateByUrl('/'), console.log('test')]);
+        }).finally(() => {
+        console.log('Betaald');
+        this.router.navigateByUrl('/confirmation');
+      });
     }, 2000);
-    console.log('Betaald');
   }
 
   instrumentToJsonString(instrument) {
