@@ -23,7 +23,7 @@ export class GiftItemComponent implements OnInit {
     this.childValueChange.emit(gift);
   }
 
-  appel(gift: Gift) {
+  quickBuyClicked(gift: Gift) {
     this.test = new CartComponent(this.router);
     this.test.gifts = [];
     this.test.gifts.push(gift);
