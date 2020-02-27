@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Gift} from '../../models/gift.model';
-import {isBoolean, isNumber, isString} from 'util';
-import {NgForOf} from '@angular/common';
+import {Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-cart',
@@ -14,7 +14,10 @@ export class CartComponent implements OnInit {
   total = 0;
   paymentBasket = [];
 
-  constructor() {
+  constructor(private router: Router) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => {
+      return false;
+    };
   }
 
   ngOnInit() {
@@ -64,15 +67,15 @@ export class CartComponent implements OnInit {
       displayItems: this.paymentBasket,
       shippingOptions: [
         {
-          id: 'standard',
-          label: 'Standard shipping',
+          id: 'free',
+          label: 'Free shipping',
           amount: {currency: 'EUR', value: '0.00'},
           selected: true
         },
         {
-          id: 'payed',
-          label: 'Payed shipping',
-          amount: {currency: 'EUR', value: '8.00'},
+          id: 'premium',
+          label: 'Premium shipping',
+          amount: {currency: 'EUR', value: '7.99'},
           selected: false
         }
       ]
@@ -126,17 +129,19 @@ export class CartComponent implements OnInit {
       shippingOption.selected =
         shippingOption.id === paymentRequest.shippingOption;
     }
-
+    // previousDetails = previousDetails.displayItems.splice(1, 1, previousDetails.shippingOptions[0]);
     event.updateWith(previousDetails);
   }
 
   onBuyClicked(request) {
-    request.canMakePayment(request.show().then((instrumentResponse) => {
-      this.sendPaymentToServer(instrumentResponse);
-    })
-      .catch((err) => {
-        window.alert('' + err);
-      }));
+    if (request.canMakePayment) {
+      request.show().then((instrumentResponse) => {
+        this.sendPaymentToServer(instrumentResponse);
+      })
+        .catch((err) => {
+          window.alert('' + err);
+        });
+    }
   }
 
   sendPaymentToServer(instrumentResponse) {
@@ -148,7 +153,7 @@ export class CartComponent implements OnInit {
         })
         .catch((err) => {
 
-        });
+        }).finally([this.router.navigateByUrl('/'), console.log('test')]);
     }, 2000);
     console.log('Betaald');
   }
