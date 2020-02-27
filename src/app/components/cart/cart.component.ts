@@ -126,6 +126,7 @@ export class CartComponent implements OnInit {
       shippingOption.selected =
         shippingOption.id === paymentRequest.shippingOption;
     }
+
     // previousDetails = previousDetails.displayItems.splice(1, 1, previousDetails.shippingOptions[0]);
     event.updateWith(previousDetails);
   }

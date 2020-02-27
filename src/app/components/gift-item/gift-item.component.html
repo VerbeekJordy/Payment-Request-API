@@ -8,6 +8,6 @@
       Kostprijs: {{gift.price}} <br/>
     </p>
   </div>
-  <button class="add" (click)="buttonClicked(gift)">Voeg toe aan je winkelmandje</button>
-  <button class="buyNow" (click)="quickBuyClicked(gift)">Buy now</button>
+  <button class="add" (click)="buttonClicked(gift)" [ngStyle]="{'width': width + '%'}">Voeg toe aan je winkelmandje</button>
+  <button class="buyNow" (click)="quickBuyClicked(gift)" *ngIf="test">Buy now</button>
 </div>

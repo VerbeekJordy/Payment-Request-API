@@ -27,3 +27,4 @@ export class GiftListComponent implements OnInit {
     this.cartItems.push(event);
   }
 }
+
