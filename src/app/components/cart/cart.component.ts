@@ -13,6 +13,33 @@ export class CartComponent implements OnInit {
   count: number;
   total = 0;
   paymentBasket = [];
+  googlePaymentDataRequest = {
+    environment: 'TEST',
+    apiVersion: 2,
+    apiVersionMinor: 0,
+    merchantInfo: {
+      // A merchant ID is available after approval by Google.
+      // @see {@link https://developers.google.com/pay/api/web/guides/test-and-deploy/integration-checklist}
+      // merchantId: '01234567890123456789',
+      merchantName: 'Example Merchant'
+    },
+    allowedPaymentMethods: [{
+      type: 'CARD',
+      parameters: {
+        allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+        allowedCardNetworks: ['AMEX', 'DISCOVER', 'INTERAC', 'JCB', 'MASTERCARD', 'VISA']
+      },
+      tokenizationSpecification: {
+        type: 'PAYMENT_GATEWAY',
+        // Check with your payment gateway on the parameters to pass.
+        // @see {@link https://developers.google.com/pay/api/web/reference/request-objects#gateway}
+        parameters: {
+          gateway: 'example',
+          gatewayMerchantId: 'exampleGatewayMerchantId'
+        }
+      }
+    }]
+  };
 
   constructor(private router: Router) {
   }
@@ -53,13 +80,11 @@ export class CartComponent implements OnInit {
   }
 
   initPaymentRequest() {
-    const networks = ['amex', 'diners', 'discover', 'jcb', 'mastercard', 'unionpay',
-      'visa', 'mir'];
-    const types = ['debit', 'credit', 'prepaid'];
     const supportedInstruments = [{
-      supportedMethods: 'basic-card',
-      data: {supportedNetworks: networks, supportedTypes: types},
-    }];
+        supportedMethods: 'basic-card',
+        data: {supportedNetworks: ['visa', 'mastercard', 'jcb']},
+      }, {supportedMethods: 'https://google.com/pay', data: this.googlePaymentDataRequest}
+    ];
 
     this.creatingBasketItems();
 
@@ -111,18 +136,18 @@ export class CartComponent implements OnInit {
         shippingOption.id === paymentRequest.shippingOption;
     }
 
-
     let selectedShippingOption;
 
     if (paymentRequest.shippingOption === 'free') {
       previousDetails.total.amount.value = +previousDetails.total.amount.value - 7.99;
-      console.log('free test');
+      this.total -= 7.99;
       selectedShippingOption = {
         label: 'Free shipping',
         amount: {currency: 'EUR', value: '0.00'}
       };
     } else if (paymentRequest.shippingOption === 'premium') {
       previousDetails.total.amount.value = +previousDetails.total.amount.value + 7.99;
+      this.total += 7.99;
       selectedShippingOption = {
         label: 'Premium shipping',
         amount: {currency: 'EUR', value: '7.99'}
