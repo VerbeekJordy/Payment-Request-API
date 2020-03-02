@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {GiftService} from '../../services/gift.service';
 import {Gift} from '../../models/gift.model';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-gift-list',
@@ -10,8 +11,9 @@ import {Gift} from '../../models/gift.model';
 export class GiftListComponent implements OnInit {
   gifts: Array<Gift>;
   cartItems: Array<Gift> = [];
+  title: string;
 
-  constructor(private service: GiftService) {
+  constructor(private service: GiftService, private titleService: Title) {
   }
 
   ngOnInit() {
