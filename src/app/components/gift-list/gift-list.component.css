@@ -1,0 +1,8 @@
+app-gift-item{
+  width: 100%;
+}
+@media only screen and (min-width: 600px) {
+  app-gift-item{
+    width: 49%;
+  }
+}
