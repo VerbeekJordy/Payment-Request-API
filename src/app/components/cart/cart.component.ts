@@ -166,7 +166,7 @@ export class CartComponent implements OnInit {
         .catch((err) => {
           this.paymentBasket.splice(0);
           this.total = 0;
-          window.alert('' + err);
+          console.log(err);
         });
     }
   }
