@@ -12,16 +12,14 @@ export class GiftItemComponent implements OnInit {
   @Input() gift: Gift;
   @Output() childValueChange = new EventEmitter();
   cartComponent: CartComponent;
-  test = (window as any).PaymentRequest;
+  present = (window as any).PaymentRequest;
   width: number;
 
   constructor(private router: Router) {
   }
 
   ngOnInit() {
-    if (this.test) {
-      this.width = 80;
-    } else {
+    if (!this.present) {
       this.width = 100;
     }
   }
