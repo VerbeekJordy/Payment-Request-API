@@ -1,7 +1,6 @@
 <nav>
-  <ul>
-    <li><a [routerLink]="['/home']">Home</a></li>
-  </ul>
+  <a [routerLink]="['/home']"><img src="../../../assets/ELI_logo.png" alt=""></a>
+  <h1 *ngIf="innerWidth > 1000">Payment Request Api Demo</h1>
 </nav>
 
 <router-outlet></router-outlet>
