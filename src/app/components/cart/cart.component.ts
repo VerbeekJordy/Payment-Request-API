@@ -28,8 +28,6 @@ export class CartComponent implements OnInit {
       },
       tokenizationSpecification: {
         type: 'PAYMENT_GATEWAY',
-        // Check with your payment gateway on the parameters to pass.
-        // @see {@link https://developers.google.com/pay/api/web/reference/request-objects#gateway}
         parameters: {
           gateway: 'example',
           gatewayMerchantId: 'exampleGatewayMerchantId'
@@ -79,7 +77,7 @@ export class CartComponent implements OnInit {
   initPaymentRequest() {
     const supportedInstruments = [{
         supportedMethods: 'basic-card',
-        data: {supportedNetworks: ['visa', 'mastercard', 'jcb']},
+        data: {supportedNetworks: ['visa', 'mastercard', 'maestro']},
       }, {supportedMethods: 'https://google.com/pay', data: this.googlePaymentDataRequest},
       {supportedMethods: 'https://apple.com/apple-pay',
         data: {
