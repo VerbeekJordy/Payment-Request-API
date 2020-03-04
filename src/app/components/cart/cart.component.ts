@@ -18,16 +18,13 @@ export class CartComponent implements OnInit {
     apiVersion: 2,
     apiVersionMinor: 0,
     merchantInfo: {
-      // A merchant ID is available after approval by Google.
-      // @see {@link https://developers.google.com/pay/api/web/guides/test-and-deploy/integration-checklist}
-      // merchantId: '01234567890123456789',
       merchantName: 'Example Merchant'
     },
     allowedPaymentMethods: [{
       type: 'CARD',
       parameters: {
         allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
-        allowedCardNetworks: ['AMEX', 'DISCOVER', 'INTERAC', 'JCB', 'MASTERCARD', 'VISA']
+        allowedCardNetworks: ['MASTERCARD', 'VISA']
       },
       tokenizationSpecification: {
         type: 'PAYMENT_GATEWAY',
@@ -36,7 +33,7 @@ export class CartComponent implements OnInit {
           gatewayMerchantId: 'exampleGatewayMerchantId'
         }
       }
-    }]
+    }, ]
   };
 
   constructor(private router: Router) {
