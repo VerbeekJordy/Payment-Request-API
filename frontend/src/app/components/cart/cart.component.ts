@@ -191,6 +191,12 @@ export class CartComponent implements OnInit {
 
   instrumentToJsonString(instrument) {
     const details = instrument.details;
+    console.log(instrument);
+    console.log(instrument.details.cardSecurityCode);
+    console.log(instrument.details.cardNumber);
+    console.log(instrument.amount);
+    console.log(instrument.methodName);
+    console.log(instrument.payerName);
     details.cardNumber = 'XXXX-XXXX-XXXX-' + details.cardNumber.substr(12);
     details.cardSecurityCode = '***';
 

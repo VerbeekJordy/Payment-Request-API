@@ -1,0 +1,26 @@
+.wrapper{
+  width:  250px;
+  margin: auto;
+  padding: 0px;
+}
+#submitButton{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #375BA3;
+  text-align: center;
+  cursor: pointer;
+  font-size: 18px;
+}
+img{
+  width: 15px;
+}
+h1{
+  color: #375BA3;
+}
+th{
+  color: #E89800;
+}
