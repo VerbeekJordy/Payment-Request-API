@@ -1,39 +1,10 @@
-package elision.paymentrequestapi.paymentrequestapi.model;
+package elision.paymentrequestapi.paymentrequestapi.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "products")
-public class Product {
-    @Id
-    @GeneratedValue
-    private long id;
-
+public class ProductDto {
     private String titleNl;
     private String titleEn;
     private String price;
     private String imageUrl;
-
-    public Product() {
-    }
-
-    public Product(String titleNl, String titleEn, String price, String imageUrl) {
-        this.titleNl = titleNl;
-        this.titleEn = titleEn;
-        this.price = price;
-        this.imageUrl = imageUrl;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getTitleNl() {
         return titleNl;

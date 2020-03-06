@@ -1,5 +1,6 @@
 package elision.paymentrequestapi.paymentrequestapi.service;
 
+import elision.paymentrequestapi.paymentrequestapi.mapper.ProductMapper;
 import elision.paymentrequestapi.paymentrequestapi.model.Product;
 import elision.paymentrequestapi.paymentrequestapi.repository.ProductRepository;
 import org.junit.jupiter.api.Assertions;

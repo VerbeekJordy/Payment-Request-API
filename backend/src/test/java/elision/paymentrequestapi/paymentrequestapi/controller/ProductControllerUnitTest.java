@@ -1,5 +1,6 @@
 package elision.paymentrequestapi.paymentrequestapi.controller;
 
+import elision.paymentrequestapi.paymentrequestapi.dto.ProductDto;
 import elision.paymentrequestapi.paymentrequestapi.model.Product;
 import elision.paymentrequestapi.paymentrequestapi.service.ProductService;
 import org.hibernate.validator.constraints.br.TituloEleitoral;
@@ -33,8 +34,8 @@ public class ProductControllerUnitTest {
 
     @Test
     public void getProduct() throws Exception {
-        List<Product> productList = new ArrayList<>();
-        productList.add(new Product());
+        List<ProductDto> productList = new ArrayList<>();
+        productList.add(new ProductDto());
 
         given(productService.getProducts()).willReturn(Optional.of(productList));
 

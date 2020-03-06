@@ -1,6 +1,6 @@
 package elision.paymentrequestapi.paymentrequestapi.controller;
 
-import elision.paymentrequestapi.paymentrequestapi.model.Product;
+import elision.paymentrequestapi.paymentrequestapi.dto.ProductDto;
 import elision.paymentrequestapi.paymentrequestapi.service.ProductService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +23,7 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Product>> getProducts() {
+    public ResponseEntity<List<ProductDto>> getProducts() {
         return productService.getProducts()
                 .map(ok())
                 .orElseGet(notFound());

@@ -24,13 +24,11 @@ export class ProductService {
   parseData(json: any): Product[] {
     return Object.keys(json).map(key => {
       const product = new Product(
-        json[key].id,
         json[key].titleNl,
         json[key].titleEn,
         json[key].price,
         json[key].imageUrl
       );
-      console.log(product);
       return product;
     });
   }
