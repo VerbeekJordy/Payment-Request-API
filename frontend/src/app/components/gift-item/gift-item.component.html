@@ -1,13 +1,13 @@
 <div class="card">
   <figure>
-    <img [src]="gift.thumbnail" alt="Avatar">
+    <img [src]="product.imageUrl" alt="Avatar">
   </figure>
   <div class="container">
-    <h4><b>{{gift.description}}</b></h4>
+    <h4><b>{{product.titleNl}}</b></h4>
     <p>
-      Kostprijs: {{gift.price}} <br/>
+      Kostprijs: {{product.price}} <br/>
     </p>
   </div>
-  <button class="add" (click)="buttonClicked(gift)" [ngStyle]="{'width': width + '%'}">Winkelmandje</button>
-  <button class="buyNow" (click)="quickBuyClicked(gift)" *ngIf="present">Buy now</button>
+  <button class="add" (click)="buttonClicked(product)" [ngStyle]="{'width': width + '%'}">Winkelmandje</button>
+  <button class="buyNow" (click)="quickBuyClicked(product)" *ngIf="present">Buy now</button>
 </div>

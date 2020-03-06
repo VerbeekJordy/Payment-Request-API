@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {GiftService} from '../../services/gift.service';
-import {Gift} from '../../models/gift.model';
-import {Title} from '@angular/platform-browser';
+import {ProductService} from '../../services/product.service';
+import {Product} from '../../models/product.model';
 
 @Component({
   selector: 'app-gift-list',
@@ -9,24 +8,24 @@ import {Title} from '@angular/platform-browser';
   styleUrls: ['./gift-list.component.css']
 })
 export class GiftListComponent implements OnInit {
-  gifts: Array<Gift>;
-  cartItems: Array<Gift> = [];
+  products: Array<Product>;
+  productsInput: Array<Product> = [];
+  productItems: Array<Product> = [];
   title: string;
 
-  constructor(private service: GiftService, private titleService: Title) {
+  constructor(private productService: ProductService) {
   }
 
   ngOnInit() {
-    this.service.getGifts('').subscribe(data => this.gifts = data);
+    this.productService.getProductsList().subscribe(data => this.products = data);
+    this.productService.getProductsList().subscribe(data => this.productsInput = data);
   }
 
   eventSearch(event: string) {
-    console.log(event);
-    this.service.getGifts(event).subscribe(data => this.gifts = data);
+    this.products = this.productsInput.filter((product: Product) => product.titleNl.match(event));
   }
 
-  eventParent(event: Gift) {
-    this.cartItems.push(event);
+  eventParent(event: Product) {
+    this.productItems.push(event);
   }
 }
-

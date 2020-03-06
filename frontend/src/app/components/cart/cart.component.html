@@ -1,9 +1,9 @@
-<div class="wrapper" *ngIf="gifts.length !== 0">
+<div class="wrapper" *ngIf="products.length !== 0">
   <h1>Cart</h1>
   <table class="tg">
-    <tr *ngFor="let gift of gifts">
-      <th>{{gift.description}} prijs: {{gift.price}} </th>
-      <button (click)="removeItemFromCart(gift)"><img
+    <tr *ngFor="let product of products">
+      <th>{{product.titleNl}} prijs: {{product.price}} </th>
+      <button (click)="removeItemFromCart(product)"><img
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSERivpQrDQEca5QcIAkKo3HBfCT79Tpx9W6ENUq8_Oui8KbhIP"
         alt="delete"></button>
     </tr>

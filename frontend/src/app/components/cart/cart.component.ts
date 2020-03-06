@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Gift} from '../../models/gift.model';
 import {Router} from '@angular/router';
+import {Product} from '../../models/product.model';
 
 
 @Component({
@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  @Input() gifts: Array<Gift>;
+  @Input() products: Array<Product>;
   count: number;
   total = 0;
   paymentBasket = [];
@@ -52,19 +52,19 @@ export class CartComponent implements OnInit {
     }
   }
 
-  removeItemFromCart(gift: Gift) {
+  removeItemFromCart(gift: Product) {
     this.count = 0;
-    while (gift.id !== this.gifts[this.count].id) {
+    while (gift.id !== this.products[this.count].id) {
       this.count++;
     }
-    this.gifts.splice(this.count, 1);
+    this.products.splice(this.count, 1);
   }
 
   creatingBasketItems() {
-    for (const item of this.gifts) {
+    for (const item of this.products) {
       this.total = +this.total + +item.price;
       this.paymentBasket.push({
-        label: item.description + '',
+        label: item.titleNl + '',
         amount: {currency: 'EUR', value: item.price + ''},
       });
     }
@@ -157,7 +157,7 @@ export class CartComponent implements OnInit {
       };
     }
 
-    previousDetails.displayItems.splice(this.gifts.length, this.paymentBasket.length, selectedShippingOption);
+    previousDetails.displayItems.splice(this.products.length, this.paymentBasket.length, selectedShippingOption);
     event.updateWith(previousDetails);
   }
 

@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './routing/app-routing.module';
 import { AppComponent } from './components/app/app.component';
 import { GiftListComponent } from './components/gift-list/gift-list.component';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InmemoryDataService } from './services/inmemory-data.service';
 import { GiftService } from './services/gift.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -14,6 +13,7 @@ import {FormsModule} from '@angular/forms';
 import { CartComponent } from './components/cart/cart.component';
 import { ConfirmPaymentComponent } from './components/confirm-payment/confirm-payment.component';
 import { RegularCheckoutComponent } from './components/regular-checkout/regular-checkout.component';
+import {ProductService} from './services/product.service';
 
 @NgModule({
   declarations: [
@@ -29,10 +29,9 @@ import { RegularCheckoutComponent } from './components/regular-checkout/regular-
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(InmemoryDataService),
     FormsModule
   ],
-  providers: [GiftService, InmemoryDataService],
+  providers: [GiftService, ProductService, InmemoryDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

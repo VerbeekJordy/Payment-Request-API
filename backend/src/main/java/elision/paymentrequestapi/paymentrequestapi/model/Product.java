@@ -12,29 +12,33 @@ public class Product {
     @GeneratedValue
     private long id;
 
-    private String title_nl;
-    private String title_en;
+    private String titleNl;
+    private String titleEn;
     private String price;
-    private String image_url;
+    private String imageUrl;
 
     public long getId() {
         return id;
     }
 
-    public String getTitle_nl() {
-        return title_nl;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public void setTitle_nl(String title_nl) {
-        this.title_nl = title_nl;
+    public String getTitleNl() {
+        return titleNl;
     }
 
-    public String getTitle_en() {
-        return title_en;
+    public void setTitleNl(String titleNl) {
+        this.titleNl = titleNl;
     }
 
-    public void setTitle_en(String title_en) {
-        this.title_en = title_en;
+    public String getTitleEn() {
+        return titleEn;
+    }
+
+    public void setTitleEn(String titleEn) {
+        this.titleEn = titleEn;
     }
 
     public String getPrice() {
@@ -45,11 +49,11 @@ public class Product {
         this.price = price;
     }
 
-    public String getImage_url() {
-        return image_url;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImage_url(String image_url) {
-        this.image_url = image_url;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

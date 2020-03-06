@@ -2,18 +2,18 @@ import {Injectable} from '@angular/core';
 import {catchError, map, tap} from 'rxjs/operators';
 import {Observable, throwError} from 'rxjs';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {Gift} from '../models/gift.model';
+import {Product} from '../models/product.model';
 
 @Injectable({providedIn: 'root'})
 export class GiftService {
-  eventUrl1 = '/api/gifts';
+  eventUrl1 = '/api/products';
 
   constructor(private http: HttpClient) {
   }
 
-  getGifts(searchStr: string): Observable<Gift[]> {
-    return this.http.get<Gift[]>(this.eventUrl1).pipe(
-      tap(gifts => console.log('Number of gifts: ' + gifts.length)),
+  getGifts(searchStr: string): Observable<Product[]> {
+    return this.http.get<Product[]>(this.eventUrl1).pipe(
+      tap(gifts => console.log('Number of products: ' + gifts.length)),
       map(res => {
         return res.filter(item => item.description.toLowerCase().includes(searchStr.toLowerCase()));
       }),
@@ -21,26 +21,26 @@ export class GiftService {
     );
   }
 
-  getGift(giftId: string): Observable<Gift> {
-    return this.http.get<Gift>(this.eventUrl1 + '/' + giftId).pipe(
+  getGift(giftId: string): Observable<Product> {
+    return this.http.get<Product>(this.eventUrl1 + '/' + giftId).pipe(
       tap(gift => console.log(gift.category + ' ' + gift.description + ' ' + gift.id)),
       catchError(this.handleError)
     );
   }
 
-  getGiftByDescription(giftDescription: string): Observable<Gift> {
-    return this.http.get<Gift>(this.eventUrl1 + '?description=' + giftDescription).pipe(
+  getGiftByDescription(giftDescription: string): Observable<Product> {
+    return this.http.get<Product>(this.eventUrl1 + '?description=' + giftDescription).pipe(
       tap(gift => console.log(gift.category + ' ' + gift.description + ' ' + gift.id)),
       catchError(this.handleError)
     );
   }
 
-  addGift(gift: Gift): Observable<number> {
+  addGift(gift: Product): Observable<number> {
     const httpHeaders = new HttpHeaders({
       'Content-Type': 'application/json'
     });
     console.log(gift);
-    return this.http.post<Gift>(this.eventUrl1 + '/' + gift.id, gift, {
+    return this.http.post<Product>(this.eventUrl1 + '/' + gift.id, gift, {
         headers: httpHeaders,
         observe: 'response'
       }
@@ -50,11 +50,11 @@ export class GiftService {
     );
   }
 
-  updateGift(gift: Gift): Observable<any> {
+  updateGift(gift: Product): Observable<any> {
     return this.http.put(this.eventUrl1, gift);
   }
 
-  deleteGift(gift: Gift): Observable<any> {
+  deleteGift(gift: Product): Observable<any> {
     return this.http.delete(this.eventUrl1 + '/' + gift.id);
   }
 
