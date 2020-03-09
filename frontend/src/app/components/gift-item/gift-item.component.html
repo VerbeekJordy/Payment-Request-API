@@ -1,0 +1,13 @@
+<div class="card">
+  <figure>
+    <img [src]="product.imageUrl" alt="Avatar">
+  </figure>
+  <div class="container">
+    <h4><b>{{product.titleNl}}</b></h4>
+    <p>
+      Kostprijs: {{product.price}} <br/>
+    </p>
+  </div>
+  <button class="add" (click)="buttonClicked(product)" [ngStyle]="{'width': width + '%'}">Winkelmandje</button>
+  <button class="buyNow" (click)="quickBuyClicked(product)" *ngIf="present">Buy now</button>
+</div>

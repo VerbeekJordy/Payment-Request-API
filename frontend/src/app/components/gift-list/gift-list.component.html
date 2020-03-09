@@ -1,0 +1,6 @@
+
+<app-filter (childValueChange)="eventSearch($event)"></app-filter>
+<div>
+  <app-gift-item *ngFor="let product of products" [product]="product" (childValueChange)="eventParent($event)"></app-gift-item>
+</div>
+<app-cart [products]="productItems"></app-cart>
