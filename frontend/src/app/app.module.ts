@@ -7,7 +7,7 @@ import { GiftListComponent } from './components/gift-list/gift-list.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { GiftItemComponent } from './components/gift-item/gift-item.component';
 import { FilterComponent } from './components/filter/filter.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CartComponent } from './components/cart/cart.component';
 import { ConfirmPaymentComponent } from './components/confirm-payment/confirm-payment.component';
 import { RegularCheckoutComponent } from './components/regular-checkout/regular-checkout.component';
@@ -29,7 +29,8 @@ import {AuthGuard} from './helpers/auth.guard';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [ProductService,
     JwtInterceptor,

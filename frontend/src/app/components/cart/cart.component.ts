@@ -54,7 +54,7 @@ export class CartComponent implements OnInit {
 
   removeItemFromCart(gift: Product) {
     this.count = 0;
-    while (gift.id !== this.products[this.count].id) {
+    while (gift.imageUrl !== this.products[this.count].imageUrl) {
       this.count++;
     }
     this.products.splice(this.count, 1);
