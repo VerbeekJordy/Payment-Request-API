@@ -1,6 +1,6 @@
 package elision.paymentrequestapi.paymentrequestapi.dto;
 
-public class UserLoginPost {
+public class UserLoginDto {
 
     private String email;
     private String password;

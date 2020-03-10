@@ -19,7 +19,7 @@ public class User {
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
                     @Parameter(name = "sequence_name", value = "user_sequence"),
-                    @Parameter(name = "initial_value", value = "5"),
+                    @Parameter(name = "initial_value", value = "1"),
                     @Parameter(name = "increment_size", value = "1")
             })
     private long id;
@@ -30,12 +30,8 @@ public class User {
     private String password;
     @Column
     private String fullName;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "USER_ROLES", joinColumns = {
-            @JoinColumn(name = "USER_ID")}, inverseJoinColumns = {
-            @JoinColumn(name = "ROLE_ID")})
-    private Set<Role> roles;
+    @ManyToOne
+    private Role role;
 
     public User() {
     }
@@ -45,12 +41,12 @@ public class User {
         this.email = email;
     }
 
-  public User(String email, String password, String fullName, Set<Role> roles) {
-      this.email = email;
-      this.password = password;
-      this.fullName = fullName;
-      this.roles = roles;
-  }
+    public User(String email, String password, String fullName, Role role) {
+        this.email = email;
+        this.password = password;
+        this.fullName = fullName;
+        this.role = role;
+    }
 
     public User(long id) {
         this.id = id;
@@ -68,13 +64,6 @@ public class User {
         this.password = password;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
 
     public String getFullName() {
         return fullName;
@@ -92,4 +81,11 @@ public class User {
         this.email = email;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 }

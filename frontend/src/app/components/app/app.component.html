@@ -1,6 +1,7 @@
 <nav>
-  <a [routerLink]="['/home']"><img src="../../../assets/ELI_logo.png" alt=""></a>
+  <a [routerLink]="['/home']"><img id="elisionIcon" src="../../../assets/ELI_logo.png" alt="Home"></a>
   <h1 *ngIf="innerWidth > 1000">Payment Request Api Demo</h1>
+  <a [routerLink]="['/login']"><img id="loginButton" src="https://pngimage.net/wp-content/uploads/2018/06/login-icon-png-transparent-1.png" alt="Login"></a>
 </nav>
 
 <router-outlet></router-outlet>

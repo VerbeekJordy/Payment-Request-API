@@ -31,7 +31,7 @@ main {
   margin: 0 auto;
 }
 
-img {
+#elisionIcon {
   width: 150px;
   margin-top: 20px;
   float: left;
@@ -39,6 +39,14 @@ img {
   padding-bottom: 10px;
   padding-right: 20px;
   margin-bottom: 10px;
+}
+
+#loginButton {
+  height: 30px;
+  width: 30px;
+  margin-top: 60px;
+  position: absolute;
+  right: 30px;
 }
 
 nav {
@@ -53,4 +61,13 @@ h1 {
   color: #E89800;
   padding-top: 50px;
   margin-left: 27%;
+}
+
+menu {
+  overflow: hidden;
+}
+
+.subnav {
+  float: left;
+  overflow: hidden;
 }

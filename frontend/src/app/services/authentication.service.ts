@@ -14,10 +14,10 @@ export class AuthenticationService {
     return this.currentUser;
   }
 
-  login(username: string, password: string) {
+  login(email: string, password: string) {
     return this.http
-      .post<any>('https://localhost:8080/login', {
-        username,
+      .post<any>('http://localhost:8080/login', {
+        email,
         password
       })
       .pipe(
@@ -38,12 +38,8 @@ export class AuthenticationService {
 
   getRoleUrl(role: string): string {
     switch (role) {
-      case 'ROLE_ADMIN':
-        return 'admin/home';
-      case 'ROLE_CLEANER':
-        return 'cleaner/home';
       case 'ROLE_USER':
-        return 'employee/home';
+        return 'admin/home';
     }
   }
 }
