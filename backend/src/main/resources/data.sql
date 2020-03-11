@@ -5,3 +5,9 @@ INSERT INTO `products` (`id`, `image_url`, `price`, `title_en`, `title_nl`) VALU
 (3, 'https://s.s-bol.com/imgbase0/imagebase3/large/FC/2/3/3/4/9200000112994332.jpg', '59', 'Laptop + mouse', 'Laptop + muis'),
 (4, 'https://gamemania-sec.azureedge.net/-/media/Sites/GameMania/Products/Accessories/Headsets/TURTLE-BEACH/Multiplatform-Turtle-Beach-Ear-Force-Recon-50P-Headset/Screenshots/Recon50P03.jpg?v=fnmFC5LSW0S6czP7dVpm+Q&Type=Small', '89', 'Headset', 'Headset'),
 (5, 'https://www.lenovo.com/medias/lenovo-desktop-v530s-tower-hero.png?context=bWFzdGVyfHJvb3R8MTg3Mzk5fGltYWdlL3BuZ3xoY2UvaDNlLzEwNjI4MjkwNDEyNTc0LnBuZ3w3OGZkODhlMTI1ODFlZGI1OTQzMmMzZWFkY2QzMWJlYjVmZmE3ZTFjZmY5YTM0YTBmNzhkZGE0NWRmMjkxNDRh', '499', 'Desktop', 'Desktop');
+
+INSERT INTO `role` (`id`, `description`, `name`) VALUES
+(0, 'Customer', 'USER');
+
+INSERT INTO `user` (`id`, `email`, `full_name`, `password`, `role_id`) VALUES
+(0, 'verbeek.jordy@elision.eu', 'Jordy Verbeek', '$2a$10$w8705oqywRzPsaiaU8L9CuzIv/pqA01pvd7i0Po4d/n64ikWveBZm', 0);
