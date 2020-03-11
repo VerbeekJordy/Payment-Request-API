@@ -18,6 +18,8 @@ import {LoginComponent} from './components/login/login.component';
 import {ToastrModule} from 'ngx-toastr';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MDBBootstrapModule} from 'angular-bootstrap-md';
+import {OverviewMenuComponent} from './components/overview-menu/overview-menu.component';
+import {MatMenuModule, MatButtonModule} from '@angular/material';
 
 
 @NgModule({
@@ -29,9 +31,12 @@ import {MDBBootstrapModule} from 'angular-bootstrap-md';
     CartComponent,
     ConfirmPaymentComponent,
     RegularCheckoutComponent,
-    LoginComponent
+    LoginComponent,
+    OverviewMenuComponent
   ],
   imports: [
+    MatMenuModule,
+    MatButtonModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
