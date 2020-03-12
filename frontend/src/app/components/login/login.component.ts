@@ -62,7 +62,6 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     // stop here if form is invalid
-    console.log(this.loginForm.getRawValue());
     if (this.loginForm.invalid) {
       this.toastr.error('Fill in the email and password', null, {
         positionClass: 'toast-bottom-center'

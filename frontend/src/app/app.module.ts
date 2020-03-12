@@ -20,6 +20,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MDBBootstrapModule} from 'angular-bootstrap-md';
 import {OverviewMenuComponent} from './components/overview-menu/overview-menu.component';
 import {MatMenuModule, MatButtonModule} from '@angular/material';
+import { LogoutComponent } from './components/logout/logout.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import {MatMenuModule, MatButtonModule} from '@angular/material';
     ConfirmPaymentComponent,
     RegularCheckoutComponent,
     LoginComponent,
-    OverviewMenuComponent
+    OverviewMenuComponent,
+    LogoutComponent
   ],
   imports: [
     MatMenuModule,
