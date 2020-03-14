@@ -41,12 +41,16 @@ main {
   margin-bottom: 10px;
 }
 
-#loginButton {
-  height: 30px;
-  width: 30px;
-  margin-top: 60px;
+app-overview-menu{
   position: absolute;
-  right: 30px;
+  right: 50px;
+  margin-top: 60px;
+}
+#loginButton {
+/*width:  150px;*/
+  /*margin-top: 60px;*/
+  /*position: absolute;*/
+  /*right: 350px;*/
 }
 
 nav {
