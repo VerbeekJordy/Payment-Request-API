@@ -1,9 +1,7 @@
 package elision.paymentrequestapi.paymentrequestapi.controller;
 
 import elision.paymentrequestapi.paymentrequestapi.dto.ProductDto;
-import elision.paymentrequestapi.paymentrequestapi.model.Product;
 import elision.paymentrequestapi.paymentrequestapi.service.ProductService;
-import org.hibernate.validator.constraints.br.TituloEleitoral;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -17,6 +17,16 @@ public class Product {
     private String price;
     private String imageUrl;
 
+
+    //////////////
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(name = "PRODUCT_ORDERS", joinColumns = {
+//            @JoinColumn(name = "PRODUCT_ID")}, inverseJoinColumns = {
+//            @JoinColumn(name = "ORDER_ID")})
+//    private Order order1;
+    //////////////
+
+
     public Product() {
     }
 
