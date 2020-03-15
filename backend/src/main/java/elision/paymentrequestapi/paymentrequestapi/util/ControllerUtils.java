@@ -40,4 +40,13 @@ public final class ControllerUtils {
     public static <T> Supplier<ResponseEntity<T>> badRequest() {
         return () -> new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
+
+    /**
+     * Takes an argument and returns an CREATED {@link ResponseEntity}.
+     * @param <T> The type of {@link ResponseEntity} to return.
+     * @return A function that takes an argument and returns an CREATED {@link ResponseEntity}.
+     */
+    public static <T> Function<T, ResponseEntity<T>> created() {
+        return value -> new ResponseEntity<>(value, HttpStatus.CREATED);
+    }
 }
