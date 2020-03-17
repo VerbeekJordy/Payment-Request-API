@@ -12,7 +12,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 
 @ExtendWith(SpringExtension.class)
@@ -31,5 +33,12 @@ public class ProductServiceUnitTest {
         productList.add(new Product());
         given(productRepository.findAll()).willReturn(productList);
         Assertions.assertEquals(productService.getProducts().get().size(), 1);
+    }
+
+    @Test
+    public void getProductById(){
+        Product product = new Product();
+        given(productRepository.findById(any())).willReturn(Optional.of(product));
+        Assertions.assertTrue(productService.getProductById("").isPresent());
     }
 }

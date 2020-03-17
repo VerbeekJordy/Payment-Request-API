@@ -11,6 +11,10 @@ public class ProductDto {
         return skuId;
     }
 
+    public void setSkuId(String skuId) {
+        this.skuId = skuId;
+    }
+
     public String getTitleNl() {
         return titleNl;
     }

@@ -12,4 +12,11 @@ public class OrderDto {
     public void setProducts(List<String> products) {
         this.products = products;
     }
+
+    public OrderDto() {
+    }
+
+    public OrderDto(List<String> products) {
+        this.products = products;
+    }
 }

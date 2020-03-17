@@ -1,5 +1,6 @@
 package elision.paymentrequestapi.paymentrequestapi.service;
 
+import elision.paymentrequestapi.paymentrequestapi.converter.StringToProductConverter;
 import elision.paymentrequestapi.paymentrequestapi.dto.OrderDto;
 import elision.paymentrequestapi.paymentrequestapi.model.Order;
 import elision.paymentrequestapi.paymentrequestapi.model.User;
@@ -31,6 +32,9 @@ public class UserServiceUnitTest {
 
     @MockBean
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @MockBean
+    private StringToProductConverter stringToProductConverter;
 
     @Autowired
     private UserService userService;
