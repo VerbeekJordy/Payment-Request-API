@@ -5,9 +5,8 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 public class User {
@@ -33,12 +32,20 @@ public class User {
     @ManyToOne
     private Role role;
 
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name="USER_ID")
+    private List<Order> orders = new ArrayList<>();
+
     public User() {
     }
 
     public User(String fullName, String email) {
         this.fullName = fullName;
         this.email = email;
+    }
+
+    public User(List<Order> orders) {
+        this.orders = orders;
     }
 
     public User(String email, String password, String fullName, Role role) {
@@ -87,5 +94,13 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }

@@ -9,8 +9,7 @@ import javax.persistence.Table;
 @Table(name = "products")
 public class Product {
     @Id
-    @GeneratedValue
-    private long id;
+    private String skuId;
 
     private String titleNl;
     private String titleEn;
@@ -27,12 +26,12 @@ public class Product {
         this.imageUrl = imageUrl;
     }
 
-    public long getId() {
-        return id;
+    public String getSkuId() {
+        return skuId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setSkuId(String skuId) {
+        this.skuId = skuId;
     }
 
     public String getTitleNl() {
