@@ -1,10 +1,11 @@
 package elision.paymentrequestapi.paymentrequestapi.controller;
 
-import elision.paymentrequestapi.paymentrequestapi.dto.OrderDto;
+import elision.paymentrequestapi.paymentrequestapi.dto.AddingOrderToUserDto;
 import elision.paymentrequestapi.paymentrequestapi.model.User;
 import elision.paymentrequestapi.paymentrequestapi.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,7 +23,7 @@ public class OrderController {
     }
 
     @PostMapping
-    public ResponseEntity<User> addingOrderToUser(String email, OrderDto orderDto) {
-        return userService.addOrderToUser(email, orderDto).map(created()).orElseGet(notFound());
+    public ResponseEntity<User> addingOrderToUser(@RequestBody AddingOrderToUserDto addingOrderToUserDto) {
+        return userService.addOrderToUser(addingOrderToUserDto.getEmail(), addingOrderToUserDto.getOrderDto()).map(created()).orElseGet(notFound());
     }
 }

@@ -1,10 +1,15 @@
 package elision.paymentrequestapi.paymentrequestapi.dto;
 
 public class ProductDto {
+    private String skuId;
     private String titleNl;
     private String titleEn;
     private String price;
     private String imageUrl;
+
+    public String getSkuId() {
+        return skuId;
+    }
 
     public String getTitleNl() {
         return titleNl;

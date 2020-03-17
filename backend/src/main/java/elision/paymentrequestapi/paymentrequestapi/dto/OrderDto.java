@@ -3,13 +3,13 @@ package elision.paymentrequestapi.paymentrequestapi.dto;
 import java.util.List;
 
 public class OrderDto {
-    private List<ProductDto> products;
+    private List<String> products;
 
-    public List<ProductDto> getProducts() {
+    public List<String> getProducts() {
         return products;
     }
 
-    public void setProducts(List<ProductDto> products) {
+    public void setProducts(List<String> products) {
         this.products = products;
     }
 }

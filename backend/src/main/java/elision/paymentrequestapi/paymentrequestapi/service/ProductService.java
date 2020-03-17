@@ -2,6 +2,7 @@ package elision.paymentrequestapi.paymentrequestapi.service;
 
 import elision.paymentrequestapi.paymentrequestapi.dto.ProductDto;
 import elision.paymentrequestapi.paymentrequestapi.mapper.ProductMapper;
+import elision.paymentrequestapi.paymentrequestapi.model.Product;
 import elision.paymentrequestapi.paymentrequestapi.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
@@ -18,5 +19,9 @@ public class ProductService {
 
     public Optional<List<ProductDto>> getProducts() {
         return Optional.of(ProductMapper.INSTANCE.ProductsToProductDtoList(productRepository.findAll()));
+    }
+
+    public Optional<Product> getProductById(String id){
+        return productRepository.findById(id);
     }
 }

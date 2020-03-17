@@ -1,6 +1,9 @@
 package elision.paymentrequestapi.paymentrequestapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -10,21 +13,11 @@ public class Order {
     @GeneratedValue
     private long id;
 
-
-    //////////////
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "PRODUCT_ORDERS", joinColumns = {
             @JoinColumn(name = "ORDER_ID")}, inverseJoinColumns = {
             @JoinColumn(name = "PRODUCT_ID")})
-    private List<Product> products;
-    //////////////
-
-
-    //////////////
-    @ManyToOne(fetch = FetchType.LAZY)
-    private User user1;
-    //////////////
-
+    private List<Product> products = new ArrayList<>();
 
     public Order() {
     }

@@ -1,5 +1,6 @@
 package elision.paymentrequestapi.paymentrequestapi.service;
 
+import elision.paymentrequestapi.paymentrequestapi.converter.StringToProductConverter;
 import elision.paymentrequestapi.paymentrequestapi.dto.OrderDto;
 import elision.paymentrequestapi.paymentrequestapi.dto.UserDto;
 import elision.paymentrequestapi.paymentrequestapi.mapper.OrderMapper;
@@ -26,10 +27,13 @@ public class UserService implements UserDetailsService {
 
     private final BCryptPasswordEncoder bcryptEncoder;
 
-    public UserService(UserRepository userRepository, RoleService roleService, BCryptPasswordEncoder bcryptEncoder) {
+    private final StringToProductConverter stringToProductConverter;
+
+    public UserService(UserRepository userRepository, RoleService roleService, BCryptPasswordEncoder bcryptEncoder, StringToProductConverter stringToProductConverter) {
         this.userRepository = userRepository;
         this.roleService = roleService;
         this.bcryptEncoder = bcryptEncoder;
+        this.stringToProductConverter = stringToProductConverter;
     }
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -74,8 +78,9 @@ public class UserService implements UserDetailsService {
 
     public Optional<User> addOrderToUser(String email, OrderDto orderDto) {
         User user = userRepository.findByEmail(email);
-        Order order = OrderMapper.INSTANCE.OrderDtoToOrder(orderDto);
+        Order order = stringToProductConverter.stringToProduct(orderDto);
         user.getOrders().add(order);
-        return Optional.ofNullable(userRepository.save(user));
+        User saveUser = userRepository.save(user);
+        return Optional.ofNullable(saveUser);
     }
 }
