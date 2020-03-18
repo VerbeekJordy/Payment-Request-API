@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {map} from 'rxjs/operators';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class AuthenticationService {
   public currentUser: string;
 
@@ -12,6 +12,19 @@ export class AuthenticationService {
 
   currentUserValue(): string {
     return this.currentUser;
+  }
+
+  currentEmail(): string {
+    return localStorage.getItem('user');
+  }
+
+  register(email: string, password: string, fullName: string) {
+    return this.http
+      .post<any>('http://localhost:8080/register', {
+        email,
+        password,
+        fullName
+      }).subscribe();
   }
 
   login(email: string, password: string) {
@@ -34,6 +47,7 @@ export class AuthenticationService {
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
+    localStorage.removeItem(('email'));
     this.currentUser = null;
   }
 

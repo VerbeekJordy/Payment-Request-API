@@ -12,6 +12,7 @@ import {CartComponent} from './components/cart/cart.component';
 import {ConfirmPaymentComponent} from './components/confirm-payment/confirm-payment.component';
 import {RegularCheckoutComponent} from './components/regular-checkout/regular-checkout.component';
 import {ProductService} from './services/product.service';
+import {OrderService} from './services/order.service';
 import {JwtInterceptor} from './helpers/jwt.interceptor';
 import {AuthGuard} from './helpers/auth.guard';
 import {LoginComponent} from './components/login/login.component';
@@ -21,6 +22,8 @@ import {MDBBootstrapModule} from 'angular-bootstrap-md';
 import {OverviewMenuComponent} from './components/overview-menu/overview-menu.component';
 import {MatMenuModule, MatButtonModule} from '@angular/material';
 import { LogoutComponent } from './components/logout/logout.component';
+import { RegisterComponent } from './components/register/register.component';
+
 
 
 @NgModule({
@@ -34,7 +37,8 @@ import { LogoutComponent } from './components/logout/logout.component';
     RegularCheckoutComponent,
     LoginComponent,
     OverviewMenuComponent,
-    LogoutComponent
+    LogoutComponent,
+    RegisterComponent
   ],
   imports: [
     MatMenuModule,

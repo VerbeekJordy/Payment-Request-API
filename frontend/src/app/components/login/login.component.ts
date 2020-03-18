@@ -76,6 +76,7 @@ export class LoginComponent implements OnInit {
         data => {
           this.rememberMe();
           this.currentUserRole = this.getDecodedAccessToken(data).scopes;
+          localStorage.setItem('email', this.getDecodedAccessToken(data).sub);
           this.loading = false;
           this.router.navigate([
             this.authenticationService.getRoleUrl(this.currentUserRole)

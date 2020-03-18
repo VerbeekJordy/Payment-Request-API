@@ -9,6 +9,4 @@ import org.mapstruct.factory.Mappers;
 public interface OrderMapper {
 
     OrderMapper INSTANCE = Mappers.getMapper(OrderMapper.class);
-
-    Order OrderDtoToOrder(OrderDto orderDto);
 }

@@ -1,5 +1,6 @@
 package elision.paymentrequestapi.paymentrequestapi.config;
 
+import elision.paymentrequestapi.paymentrequestapi.model.Session;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.SignatureException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
         } else {
             logger.warn("couldn't find bearer string, will ignore the header");
+            Session.setUsername("GUEST");
         }
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
@@ -56,8 +58,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 logger.info("authenticated user " + username + ", setting security context");
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
+            Session.setUsername(username);
         }
-
         chain.doFilter(req, res);
     }
 }
