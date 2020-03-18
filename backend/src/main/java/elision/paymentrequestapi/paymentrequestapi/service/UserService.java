@@ -1,11 +1,8 @@
 package elision.paymentrequestapi.paymentrequestapi.service;
 
 import elision.paymentrequestapi.paymentrequestapi.converter.StringToProductConverter;
-import elision.paymentrequestapi.paymentrequestapi.dto.OrderDto;
 import elision.paymentrequestapi.paymentrequestapi.dto.UserDto;
-import elision.paymentrequestapi.paymentrequestapi.mapper.OrderMapper;
 import elision.paymentrequestapi.paymentrequestapi.mapper.UserMapper;
-import elision.paymentrequestapi.paymentrequestapi.model.Order;
 import elision.paymentrequestapi.paymentrequestapi.model.Role;
 import elision.paymentrequestapi.paymentrequestapi.model.User;
 import elision.paymentrequestapi.paymentrequestapi.repository.UserRepository;
@@ -16,7 +13,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -74,13 +74,5 @@ public class UserService implements UserDetailsService {
         user.setRole(role);
         user.setPassword(bcryptEncoder.encode(user.getPassword()));
         return userRepository.save(user);
-    }
-
-    public Optional<User> addOrderToUser(String email, OrderDto orderDto) {
-        User user = userRepository.findByEmail(email);
-        Order order = stringToProductConverter.stringToProduct(orderDto);
-        user.getOrders().add(order);
-        User saveUser = userRepository.save(user);
-        return Optional.ofNullable(saveUser);
     }
 }

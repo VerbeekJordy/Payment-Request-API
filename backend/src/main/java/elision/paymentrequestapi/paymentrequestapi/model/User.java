@@ -18,7 +18,7 @@ public class User {
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
                     @Parameter(name = "sequence_name", value = "user_sequence"),
-                    @Parameter(name = "initial_value", value = "1"),
+                    @Parameter(name = "initial_value", value = "2"),
                     @Parameter(name = "increment_size", value = "1")
             })
     private long id;
@@ -32,8 +32,7 @@ public class User {
     @ManyToOne
     private Role role;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name="USER_ID")
+    @OneToMany(mappedBy = "users", cascade = CascadeType.PERSIST)
     private List<Order> orders = new ArrayList<>();
 
     public User() {

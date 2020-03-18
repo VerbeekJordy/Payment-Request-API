@@ -27,7 +27,8 @@ export class ProductService {
         json[key].titleNl,
         json[key].titleEn,
         json[key].price,
-        json[key].imageUrl
+        json[key].imageUrl,
+        json[key].skuId
       );
       return product;
     });

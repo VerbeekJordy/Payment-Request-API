@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Product} from '../../models/product.model';
+import {OrderService} from '../../services/order.service';
+import {OrderConverter} from '../../converters/order.converter';
 
 
 @Component({
@@ -10,9 +12,13 @@ import {Product} from '../../models/product.model';
 })
 export class CartComponent implements OnInit {
   @Input() products: Array<Product>;
+
   count: number;
+
   total = 0;
+
   paymentBasket = [];
+
   googlePaymentDataRequest = {
     environment: 'TEST',
     apiVersion: 2,
@@ -36,7 +42,7 @@ export class CartComponent implements OnInit {
     }, ]
   };
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private orderService: OrderService, private converter: OrderConverter) {
   }
 
   ngOnInit() {
@@ -76,17 +82,19 @@ export class CartComponent implements OnInit {
 
   initPaymentRequest() {
     const supportedInstruments = [{
-        supportedMethods: 'basic-card',
-        data: {supportedNetworks: ['visa', 'mastercard', 'maestro']},
-      }, {supportedMethods: 'https://google.com/pay', data: this.googlePaymentDataRequest},
-      {supportedMethods: 'https://apple.com/apple-pay',
+      supportedMethods: 'basic-card',
+      data: {supportedNetworks: ['visa', 'mastercard', 'maestro']},
+    }, {supportedMethods: 'https://google.com/pay', data: this.googlePaymentDataRequest},
+      {
+        supportedMethods: 'https://apple.com/apple-pay',
         data: {
           version: 3,
           merchantIdentifier: 'merchant.com.example',
           merchantCapabilities: ['supports3DS', 'supportsCredit', 'supportsDebit'],
           supportedNetworks: ['amex', 'discover', 'masterCard', 'visa'],
           countryCode: 'US',
-        }}
+        }
+      }
     ];
 
     this.creatingBasketItems();
@@ -177,6 +185,8 @@ export class CartComponent implements OnInit {
     window.setTimeout(() => {
       instrumentResponse.complete('success')
         .then(() => {
+          this.orderService.addOrder(this.converter.productToStringArray(this.products));
+          console.log(this.products);
           document.getElementById('result').innerHTML =
             this.instrumentToJsonString(instrumentResponse);
         })

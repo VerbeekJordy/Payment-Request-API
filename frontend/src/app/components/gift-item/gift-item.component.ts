@@ -2,6 +2,8 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Product} from '../../models/product.model';
 import {CartComponent} from '../cart/cart.component';
 import {Router} from '@angular/router';
+import {OrderService} from '../../services/order.service';
+import {OrderConverter} from '../../converters/order.converter';
 
 @Component({
   selector: 'app-gift-item',
@@ -15,7 +17,7 @@ export class GiftItemComponent implements OnInit {
   present = (window as any).PaymentRequest;
   width: number;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private service: OrderService, private converter: OrderConverter) {
   }
 
   ngOnInit() {
@@ -29,7 +31,7 @@ export class GiftItemComponent implements OnInit {
   }
 
   quickBuyClicked(gift: Product) {
-    this.cartComponent = new CartComponent(this.router);
+    this.cartComponent = new CartComponent(this.router, this.service, this.converter);
     this.cartComponent.products = [];
     this.cartComponent.products.push(gift);
     this.cartComponent.payButtonClicked();

@@ -1,9 +1,12 @@
 package elision.paymentrequestapi.paymentrequestapi.converter;
 
 import elision.paymentrequestapi.paymentrequestapi.dto.OrderDto;
-import elision.paymentrequestapi.paymentrequestapi.model.Order;
+import elision.paymentrequestapi.paymentrequestapi.model.Product;
 import elision.paymentrequestapi.paymentrequestapi.service.ProductService;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class StringToProductConverter {
@@ -14,13 +17,14 @@ public class StringToProductConverter {
         this.productService = productService;
     }
 
-    public Order stringToProduct(OrderDto orderDto){
-        Order order = new Order();
+    public List<Product> stringToProduct(OrderDto orderDto){
+        List<Product> products = new ArrayList<>();
+
         for (String product : orderDto.getProducts()) {
             if (productService.getProductById(product).isPresent()) {
-                order.getProducts().add(productService.getProductById(product).get());
+                products.add(productService.getProductById(product).get());
             }
         }
-        return order;
+        return products;
     }
 }

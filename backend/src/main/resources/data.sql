@@ -10,4 +10,5 @@ INSERT INTO `role` (`id`, `description`, `name`) VALUES
 (0, 'Customer', 'USER');
 
 INSERT INTO `user` (`id`, `email`, `full_name`, `password`, `role_id`) VALUES
-(0, 'verbeek.jordy@elision.eu', 'Jordy Verbeek', '$2a$10$w8705oqywRzPsaiaU8L9CuzIv/pqA01pvd7i0Po4d/n64ikWveBZm', 0);
+(0, 'GUEST', 'guest orders', '$2a$10$JE814LS5aAtdWuXI/giQ0OfEpT9n23u2zUgho0a73olJpXIfQkej2', 0),
+(1, 'verbeek.jordy@elision.eu', 'Jordy Verbeek', '$2a$10$w8705oqywRzPsaiaU8L9CuzIv/pqA01pvd7i0Po4d/n64ikWveBZm', 0);
