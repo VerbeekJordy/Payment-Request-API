@@ -1,10 +1,9 @@
 package elision.paymentrequestapi.paymentrequestapi.controller;
 
-import elision.paymentrequestapi.paymentrequestapi.dto.AddingOrderToUserDto;
 import elision.paymentrequestapi.paymentrequestapi.dto.OrderDto;
+import elision.paymentrequestapi.paymentrequestapi.model.Order;
 import elision.paymentrequestapi.paymentrequestapi.model.Session;
-import elision.paymentrequestapi.paymentrequestapi.model.User;
-import elision.paymentrequestapi.paymentrequestapi.service.UserService;
+import elision.paymentrequestapi.paymentrequestapi.service.OrderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,14 +17,21 @@ import static elision.paymentrequestapi.paymentrequestapi.util.ControllerUtils.n
 @RequestMapping("/order")
 public class OrderController {
 
-    private final UserService userService;
+//    private final UserService userService;
+//
+//    public OrderController(UserService userService) {
+//        this.userService = userService;
+//    }
 
-    public OrderController(UserService userService) {
-        this.userService = userService;
+    private final OrderService orderService;
+
+    public OrderController(OrderService orderService) {
+        this.orderService = orderService;
     }
 
     @PostMapping
-    public ResponseEntity<User> addingOrderToUser(@RequestBody OrderDto orderDto) {
-        return userService.addOrderToUser(Session.getUsername(), orderDto).map(created()).orElseGet(notFound());
+    public ResponseEntity<Order> addingOrderToUser(@RequestBody OrderDto orderDto) {
+        return orderService.addingOrder(Session.getUsername(), orderDto).map(created()).orElseGet(notFound());
+//        return userService.addOrderToUser(Session.getUsername(), orderDto).map(created()).orElseGet(notFound());
     }
 }

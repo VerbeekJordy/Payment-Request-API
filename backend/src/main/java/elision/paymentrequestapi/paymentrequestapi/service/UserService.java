@@ -76,11 +76,11 @@ public class UserService implements UserDetailsService {
         return userRepository.save(user);
     }
 
-    public Optional<User> addOrderToUser(String email, OrderDto orderDto) {
-        User user = userRepository.findByEmail(email);
-        Order order = stringToProductConverter.stringToProduct(orderDto);
-        user.getOrders().add(order);
-        User saveUser = userRepository.save(user);
-        return Optional.ofNullable(saveUser);
-    }
+//    public Optional<User> addOrderToUser(String email, OrderDto orderDto) {
+//        User user = userRepository.findByEmail(email);
+//        Order order = stringToProductConverter.stringToProduct(orderDto);
+//        user.getOrders().add(order);
+//        User saveUser = userRepository.save(user);
+//        return Optional.ofNullable(saveUser);
+//    }
 }

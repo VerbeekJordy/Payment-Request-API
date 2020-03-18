@@ -32,8 +32,7 @@ public class User {
     @ManyToOne
     private Role role;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name="USER_ID")
+    @OneToMany(mappedBy = "users", cascade = CascadeType.PERSIST)
     private List<Order> orders = new ArrayList<>();
 
     public User() {

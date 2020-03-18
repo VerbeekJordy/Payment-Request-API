@@ -3,7 +3,9 @@ package elision.paymentrequestapi.paymentrequestapi.service;
 import elision.paymentrequestapi.paymentrequestapi.converter.StringToProductConverter;
 import elision.paymentrequestapi.paymentrequestapi.dto.OrderDto;
 import elision.paymentrequestapi.paymentrequestapi.model.Order;
+import elision.paymentrequestapi.paymentrequestapi.model.Product;
 import elision.paymentrequestapi.paymentrequestapi.model.User;
+import elision.paymentrequestapi.paymentrequestapi.repository.OrderRepository;
 import elision.paymentrequestapi.paymentrequestapi.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -22,13 +24,11 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = UserService.class)
-public class UserServiceUnitTest {
-    @MockBean
-    private UserRepository userRepository;
+@SpringBootTest(classes = OrderService.class)
+public class OrderServiceUnitTest {
 
     @MockBean
-    private RoleService roleService;
+    private UserRepository userRepository;
 
     @MockBean
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -36,18 +36,20 @@ public class UserServiceUnitTest {
     @MockBean
     private StringToProductConverter stringToProductConverter;
 
+    @MockBean
+    private OrderRepository orderRepository;
+
     @Autowired
-    private UserService userService;
+    private OrderService orderService;
 
     @Test
     public void addOrderToUser() {
         User user = new User();
-        List<Order> orders = new ArrayList<>();
-        orders.add(new Order());
-        User userAddedOrder = new User(orders);
+        List<Product> products = new ArrayList<>();
+        Order order = new Order(products);
         OrderDto orderDto = new OrderDto();
         given(userRepository.findByEmail(anyString())).willReturn(user);
-        given(userRepository.save(any())).willReturn(userAddedOrder);
-        Assertions.assertEquals(userService.addOrderToUser("", orderDto).get().getOrders().size(), 1);
+        given(orderRepository.save(any())).willReturn(order);
+        Assertions.assertTrue(orderService.addingOrder("", orderDto).isPresent());
     }
 }
