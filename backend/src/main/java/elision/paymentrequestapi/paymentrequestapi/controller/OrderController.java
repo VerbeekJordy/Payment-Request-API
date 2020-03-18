@@ -17,12 +17,6 @@ import static elision.paymentrequestapi.paymentrequestapi.util.ControllerUtils.n
 @RequestMapping("/order")
 public class OrderController {
 
-//    private final UserService userService;
-//
-//    public OrderController(UserService userService) {
-//        this.userService = userService;
-//    }
-
     private final OrderService orderService;
 
     public OrderController(OrderService orderService) {
@@ -32,6 +26,5 @@ public class OrderController {
     @PostMapping
     public ResponseEntity<Order> addingOrderToUser(@RequestBody OrderDto orderDto) {
         return orderService.addingOrder(Session.getUsername(), orderDto).map(created()).orElseGet(notFound());
-//        return userService.addOrderToUser(Session.getUsername(), orderDto).map(created()).orElseGet(notFound());
     }
 }
