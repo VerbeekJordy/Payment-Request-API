@@ -1,7 +1,7 @@
 package elision.paymentrequestapi.paymentrequestapi.service;
 
 import elision.paymentrequestapi.paymentrequestapi.converter.StringToProductConverter;
-import elision.paymentrequestapi.paymentrequestapi.dto.OrderDto;
+import elision.paymentrequestapi.paymentrequestapi.dto.OrderInComingDto;
 import elision.paymentrequestapi.paymentrequestapi.model.Order;
 import elision.paymentrequestapi.paymentrequestapi.model.Product;
 import elision.paymentrequestapi.paymentrequestapi.model.User;
@@ -47,9 +47,16 @@ public class OrderServiceUnitTest {
         User user = new User();
         List<Product> products = new ArrayList<>();
         Order order = new Order(products);
-        OrderDto orderDto = new OrderDto();
+        OrderInComingDto orderInComingDto = new OrderInComingDto();
         given(userRepository.findByEmail(anyString())).willReturn(user);
         given(orderRepository.save(any())).willReturn(order);
-        Assertions.assertTrue(orderService.addingOrder("", orderDto).isPresent());
+        Assertions.assertTrue(orderService.addingOrder("", orderInComingDto).isPresent());
+    }
+
+    @Test
+    public void gettingOrder(){
+        User user = new User();
+        given(userRepository.findByEmail(anyString())).willReturn(user);
+        Assertions.assertTrue(orderService.gettingOrder("").isPresent());
     }
 }

@@ -1,6 +1,6 @@
 package elision.paymentrequestapi.paymentrequestapi.converter;
 
-import elision.paymentrequestapi.paymentrequestapi.dto.OrderDto;
+import elision.paymentrequestapi.paymentrequestapi.dto.OrderInComingDto;
 import elision.paymentrequestapi.paymentrequestapi.model.Product;
 import elision.paymentrequestapi.paymentrequestapi.service.ProductService;
 import org.springframework.stereotype.Component;
@@ -17,10 +17,10 @@ public class StringToProductConverter {
         this.productService = productService;
     }
 
-    public List<Product> stringToProduct(OrderDto orderDto){
+    public List<Product> stringToProduct(OrderInComingDto orderInComingDto){
         List<Product> products = new ArrayList<>();
 
-        for (String product : orderDto.getProducts()) {
+        for (String product : orderInComingDto.getProducts()) {
             if (productService.getProductById(product).isPresent()) {
                 products.add(productService.getProductById(product).get());
             }

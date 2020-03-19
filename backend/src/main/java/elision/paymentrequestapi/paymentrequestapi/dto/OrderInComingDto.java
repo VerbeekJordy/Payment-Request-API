@@ -2,7 +2,7 @@ package elision.paymentrequestapi.paymentrequestapi.dto;
 
 import java.util.List;
 
-public class OrderDto {
+public class OrderInComingDto {
     private List<String> products;
 
     public List<String> getProducts() {
@@ -13,10 +13,10 @@ public class OrderDto {
         this.products = products;
     }
 
-    public OrderDto() {
+    public OrderInComingDto() {
     }
 
-    public OrderDto(List<String> products) {
+    public OrderInComingDto(List<String> products) {
         this.products = products;
     }
 }

@@ -1,12 +1,12 @@
 package elision.paymentrequestapi.paymentrequestapi.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import elision.paymentrequestapi.paymentrequestapi.dto.OrderDto;
+import elision.paymentrequestapi.paymentrequestapi.dto.OrderInComingDto;
+import elision.paymentrequestapi.paymentrequestapi.dto.OrderOutGoingDto;
 import elision.paymentrequestapi.paymentrequestapi.dto.ProductDto;
 import elision.paymentrequestapi.paymentrequestapi.model.Order;
 import elision.paymentrequestapi.paymentrequestapi.model.Product;
 import elision.paymentrequestapi.paymentrequestapi.service.OrderService;
-import elision.paymentrequestapi.paymentrequestapi.service.ProductService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,16 +38,30 @@ public class OrderControllerUnitTest {
     @MockBean
     private OrderService orderService;
 
+
     @Test
-    public void getProduct() throws Exception {
+    public void getOrders() throws Exception {
+        List<OrderOutGoingDto> orderList = new ArrayList<>();
+        orderList.add(new OrderOutGoingDto());
+
+        given(orderService.gettingOrder(any())).willReturn(Optional.ofNullable(orderList));
+
+        mockMvc.perform(get("/order")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(1)));
+    }
+
+    @Test
+    public void postOrder() throws Exception {
         List<Product> products = new ArrayList<>();
         Order order = new Order(products);
-        OrderDto orderDto = new OrderDto();
+        OrderInComingDto orderInComingDto = new OrderInComingDto();
         given(orderService.addingOrder(any(), any())).willReturn(Optional.ofNullable(order));
 
         mockMvc.perform(MockMvcRequestBuilders
                 .post("/order")
-                .content(asJsonString(orderDto))
+                .content(asJsonString(orderInComingDto))
                 .contentType(APPLICATION_JSON)
                 .accept(APPLICATION_JSON))
                 .andExpect(status().isCreated());

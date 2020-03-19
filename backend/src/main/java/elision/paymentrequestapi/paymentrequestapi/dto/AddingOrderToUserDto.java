@@ -2,7 +2,7 @@ package elision.paymentrequestapi.paymentrequestapi.dto;
 
 public class AddingOrderToUserDto {
     private String email;
-    private OrderDto orderDto;
+    private OrderInComingDto orderInComingDto;
 
     public String getEmail() {
         return email;
@@ -12,11 +12,11 @@ public class AddingOrderToUserDto {
         this.email = email;
     }
 
-    public OrderDto getOrderDto() {
-        return orderDto;
+    public OrderInComingDto getOrderInComingDto() {
+        return orderInComingDto;
     }
 
-    public void setOrderDto(OrderDto orderDto) {
-        this.orderDto = orderDto;
+    public void setOrderInComingDto(OrderInComingDto orderInComingDto) {
+        this.orderInComingDto = orderInComingDto;
     }
 }
