@@ -9,10 +9,13 @@ import {Order} from '../models/order.model';
 })
 export class OrderComponent implements OnInit {
   @Input() order: Order;
+  total = 0;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
+    this.order.products.forEach(product => this.total = +this.total + +product.price);
   }
 
 }
