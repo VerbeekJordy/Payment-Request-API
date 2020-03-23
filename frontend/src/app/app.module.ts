@@ -24,6 +24,7 @@ import {MatMenuModule, MatButtonModule} from '@angular/material';
 import { LogoutComponent } from './components/logout/logout.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ResetRequestComponent } from './components/reset-request/reset-request.component';
+import { ResetComponent } from './components/reset/reset.component';
 
 
 
@@ -40,7 +41,8 @@ import { ResetRequestComponent } from './components/reset-request/reset-request.
     OverviewMenuComponent,
     LogoutComponent,
     RegisterComponent,
-    ResetRequestComponent
+    ResetRequestComponent,
+    ResetComponent
   ],
   imports: [
     MatMenuModule,

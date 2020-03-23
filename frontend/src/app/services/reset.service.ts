@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {ResetModel} from '../models/reset.model';
 
 @Injectable({providedIn: 'root'})
 export class ResetService {
@@ -12,6 +13,13 @@ export class ResetService {
     return this.http
       .post<string>(this.BASE_API_URL + 'token',
         email
+      ).subscribe();
+  }
+
+  resetPassword(resetModel: ResetModel) {
+    return this.http
+      .post<ResetModel>(this.BASE_API_URL + 'reset',
+        resetModel
       ).subscribe();
   }
 }
