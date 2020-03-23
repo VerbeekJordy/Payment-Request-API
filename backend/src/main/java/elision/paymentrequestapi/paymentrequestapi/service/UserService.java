@@ -75,9 +75,11 @@ public class UserService implements UserDetailsService {
 
     public void createToken(String email) {
         User user = userRepository.findByEmail(email);
-        user.setToken(UUID.randomUUID().toString());
-        userRepository.save(user);
-        emailGoogleService.sendSimpleMessage(email, "Reset password", "Dear customer,\nClick on the following link to reset your personal password: http://localhost:4200/reset/" + user.getToken());
+        if (user != null) {
+            user.setToken(UUID.randomUUID().toString());
+            userRepository.save(user);
+            emailGoogleService.sendSimpleMessage(email, "Reset password", "Dear customer,\nClick on the following link to reset your personal password: http://localhost:4200/reset/" + user.getToken());
+        }
     }
 
     public Optional<User> resetPassword(ResetPassword resetPassword) {

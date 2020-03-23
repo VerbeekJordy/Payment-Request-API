@@ -23,6 +23,7 @@ import {OverviewMenuComponent} from './components/overview-menu/overview-menu.co
 import {MatMenuModule, MatButtonModule} from '@angular/material';
 import { LogoutComponent } from './components/logout/logout.component';
 import { RegisterComponent } from './components/register/register.component';
+import { ResetRequestComponent } from './components/reset-request/reset-request.component';
 
 
 
@@ -38,7 +39,8 @@ import { RegisterComponent } from './components/register/register.component';
     LoginComponent,
     OverviewMenuComponent,
     LogoutComponent,
-    RegisterComponent
+    RegisterComponent,
+    ResetRequestComponent
   ],
   imports: [
     MatMenuModule,

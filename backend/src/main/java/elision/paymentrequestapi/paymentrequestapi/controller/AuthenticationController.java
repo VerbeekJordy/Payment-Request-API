@@ -57,7 +57,7 @@ public class AuthenticationController {
     }
 
     @PostMapping(value = "/token")
-    public ResponseEntity createToken(String email) {
+    public ResponseEntity createToken(@RequestBody String email) {
         userService.createToken(email);
         return new ResponseEntity(HttpStatus.OK);
     }
