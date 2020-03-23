@@ -194,7 +194,7 @@ export class CartComponent implements OnInit {
 
         }).finally(() => {
         console.log('Betaald');
-        this.router.navigateByUrl('/confirmation');
+        this.router.navigateByUrl('/transaction');
       });
     }, 2000);
   }

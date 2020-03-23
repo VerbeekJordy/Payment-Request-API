@@ -26,6 +26,8 @@ import { ResetRequestComponent } from './components/reset-request/reset-request.
 import { ResetComponent } from './components/reset/reset.component';
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
 import { OrderComponent } from './order/order.component';
+import {NgxSpinnerModule} from 'ngx-spinner';
+import { TransactionComponent } from './components/transaction/transaction.component';
 
 
 
@@ -45,7 +47,8 @@ import { OrderComponent } from './order/order.component';
     ResetRequestComponent,
     ResetComponent,
     OrderHistoryComponent,
-    OrderComponent
+    OrderComponent,
+    TransactionComponent
   ],
   imports: [
     MatMenuModule,
@@ -58,6 +61,7 @@ import { OrderComponent } from './order/order.component';
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
     MDBBootstrapModule.forRoot(),
+    NgxSpinnerModule,
   ],
   providers: [ProductService,
     JwtInterceptor,
