@@ -12,7 +12,6 @@ import {CartComponent} from './components/cart/cart.component';
 import {ConfirmPaymentComponent} from './components/confirm-payment/confirm-payment.component';
 import {RegularCheckoutComponent} from './components/regular-checkout/regular-checkout.component';
 import {ProductService} from './services/product.service';
-import {OrderService} from './services/order.service';
 import {JwtInterceptor} from './helpers/jwt.interceptor';
 import {AuthGuard} from './helpers/auth.guard';
 import {LoginComponent} from './components/login/login.component';
@@ -25,6 +24,8 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ResetRequestComponent } from './components/reset-request/reset-request.component';
 import { ResetComponent } from './components/reset/reset.component';
+import { OrderHistoryComponent } from './components/order-history/order-history.component';
+import { OrderComponent } from './order/order.component';
 
 
 
@@ -42,7 +43,9 @@ import { ResetComponent } from './components/reset/reset.component';
     LogoutComponent,
     RegisterComponent,
     ResetRequestComponent,
-    ResetComponent
+    ResetComponent,
+    OrderHistoryComponent,
+    OrderComponent
   ],
   imports: [
     MatMenuModule,
