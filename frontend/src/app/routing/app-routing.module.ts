@@ -6,7 +6,10 @@ import {RegularCheckoutComponent} from '../components/regular-checkout/regular-c
 import {LoginComponent} from '../components/login/login.component';
 import {LogoutComponent} from '../components/logout/logout.component';
 import {RegisterComponent} from '../components/register/register.component';
+import {ResetRequestComponent} from '../components/reset-request/reset-request.component';
+import {ResetComponent} from '../components/reset/reset.component';
 import {OrderHistoryComponent} from '../components/order-history/order-history.component';
+
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -16,6 +19,8 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'logout', component: LogoutComponent},
   {path: 'register', component: RegisterComponent},
+  {path: 'recover', component: ResetRequestComponent},
+  {path: 'reset/:guid', component: ResetComponent},
   {path: 'orders', component: OrderHistoryComponent},
   {path: '**', redirectTo: '/home', pathMatch: 'full'}
 

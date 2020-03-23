@@ -29,6 +29,8 @@ public class User {
     private String password;
     @Column
     private String fullName;
+    @Column
+    private String token;
     @ManyToOne
     private Role role;
 
@@ -101,5 +103,13 @@ public class User {
 
     public void setOrders(List<Order> orders) {
         this.orders = orders;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
