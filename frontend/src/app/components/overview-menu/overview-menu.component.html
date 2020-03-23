@@ -1,8 +1,9 @@
 <div class="dropdown">
   <button class="dropbtn"><img id="loginButton" src="../../../assets/login.png" alt="login"></button>
   <div class="dropdown-content">
+    <a *ngIf="loggedIn" [routerLink]="['/orders']">Orders</a>
     <a *ngIf="!loggedIn" [routerLink]="['/register']">Sign Up</a>
-    <a *ngIf="loggedIn" [routerLink]="['/logout']">logout</a>
+    <a *ngIf="loggedIn" [routerLink]="['/logout']">Sign out</a>
     <a *ngIf="!loggedIn" [routerLink]="['/login']">Sign In</a>
   </div>
 </div>

@@ -23,6 +23,8 @@ import {OverviewMenuComponent} from './components/overview-menu/overview-menu.co
 import {MatMenuModule, MatButtonModule} from '@angular/material';
 import { LogoutComponent } from './components/logout/logout.component';
 import { RegisterComponent } from './components/register/register.component';
+import { OrderHistoryComponent } from './components/order-history/order-history.component';
+import { OrderComponent } from './order/order.component';
 
 
 
@@ -38,7 +40,9 @@ import { RegisterComponent } from './components/register/register.component';
     LoginComponent,
     OverviewMenuComponent,
     LogoutComponent,
-    RegisterComponent
+    RegisterComponent,
+    OrderHistoryComponent,
+    OrderComponent
   ],
   imports: [
     MatMenuModule,
