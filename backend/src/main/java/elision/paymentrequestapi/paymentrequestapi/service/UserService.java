@@ -1,6 +1,6 @@
 package elision.paymentrequestapi.paymentrequestapi.service;
 
-import elision.paymentrequestapi.paymentrequestapi.converter.StringToProductConverter;
+import elision.paymentrequestapi.paymentrequestapi.dto.ResetPassword;
 import elision.paymentrequestapi.paymentrequestapi.dto.UserDto;
 import elision.paymentrequestapi.paymentrequestapi.mapper.UserMapper;
 import elision.paymentrequestapi.paymentrequestapi.model.Role;
@@ -13,10 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -27,13 +24,13 @@ public class UserService implements UserDetailsService {
 
     private final BCryptPasswordEncoder bcryptEncoder;
 
-    private final StringToProductConverter stringToProductConverter;
+    private final EmailGoogleService emailGoogleService;
 
-    public UserService(UserRepository userRepository, RoleService roleService, BCryptPasswordEncoder bcryptEncoder, StringToProductConverter stringToProductConverter) {
+    public UserService(UserRepository userRepository, RoleService roleService, BCryptPasswordEncoder bcryptEncoder, EmailGoogleService emailGoogleService) {
         this.userRepository = userRepository;
         this.roleService = roleService;
         this.bcryptEncoder = bcryptEncoder;
-        this.stringToProductConverter = stringToProductConverter;
+        this.emailGoogleService = emailGoogleService;
     }
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -74,5 +71,19 @@ public class UserService implements UserDetailsService {
         user.setRole(role);
         user.setPassword(bcryptEncoder.encode(user.getPassword()));
         return userRepository.save(user);
+    }
+
+    public void createToken(String email) {
+        User user = userRepository.findByEmail(email);
+        user.setToken(UUID.randomUUID().toString());
+        userRepository.save(user);
+        emailGoogleService.sendSimpleMessage(email, "Reset password", "Dear customer,\nClick on the following link to reset your personal password: http://localhost:4200/reset/" + user.getToken());
+    }
+
+    public Optional<User> resetPassword(ResetPassword resetPassword) {
+        User user = userRepository.getUserByRegistrationToken(resetPassword.getToken());
+        user.setPassword(bcryptEncoder.encode(resetPassword.getPassword()));
+        user.setToken(null);
+        return Optional.ofNullable(userRepository.save(user));
     }
 }

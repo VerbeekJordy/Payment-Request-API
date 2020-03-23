@@ -17,11 +17,13 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final StringToProductConverter stringToProductConverter;
     private final UserRepository userRepository;
+    private final EmailGoogleService emailGoogleService;
 
-    public OrderService(OrderRepository orderRepository, StringToProductConverter stringToProductConverter, UserRepository userRepository) {
+    public OrderService(OrderRepository orderRepository, StringToProductConverter stringToProductConverter, UserRepository userRepository, EmailGoogleService emailGoogleService) {
         this.orderRepository = orderRepository;
         this.stringToProductConverter = stringToProductConverter;
         this.userRepository = userRepository;
+        this.emailGoogleService = emailGoogleService;
     }
 
     public Optional<Order> addingOrder(String email, OrderInComingDto orderInComingDto) {
@@ -29,6 +31,9 @@ public class OrderService {
         order.setProducts(stringToProductConverter.stringToProduct(orderInComingDto));
         order.setUsers(userRepository.findByEmail(email));
         Order savedOrder = orderRepository.save(order);
+        if(savedOrder != null){
+//            emailGoogleService.sendSimpleMessage(email, "Order demo", "Your purchase was accepted, thank you for your trust. We will be packaging your product soon.");
+        }
         return Optional.ofNullable(savedOrder);
     }
 

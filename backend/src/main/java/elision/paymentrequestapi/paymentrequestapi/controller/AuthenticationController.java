@@ -1,28 +1,23 @@
 package elision.paymentrequestapi.paymentrequestapi.controller;
 
 import elision.paymentrequestapi.paymentrequestapi.config.TokenProvider;
+import elision.paymentrequestapi.paymentrequestapi.dto.ResetPassword;
 import elision.paymentrequestapi.paymentrequestapi.dto.UserDto;
 import elision.paymentrequestapi.paymentrequestapi.dto.UserLoginDto;
 import elision.paymentrequestapi.paymentrequestapi.model.AuthToken;
-import elision.paymentrequestapi.paymentrequestapi.model.Role;
 import elision.paymentrequestapi.paymentrequestapi.model.User;
-import elision.paymentrequestapi.paymentrequestapi.service.RoleService;
 import elision.paymentrequestapi.paymentrequestapi.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
+import static elision.paymentrequestapi.paymentrequestapi.util.ControllerUtils.notFound;
+import static elision.paymentrequestapi.paymentrequestapi.util.ControllerUtils.ok;
 
 
 @RestController
@@ -59,6 +54,17 @@ public class AuthenticationController {
     public ResponseEntity<User> addNewUser(@RequestBody UserDto userDto) {
         User addedUser = userService.save(userDto);
         return new ResponseEntity<>(addedUser, HttpStatus.CREATED);
+    }
+
+    @PostMapping(value = "/token")
+    public ResponseEntity createToken(String email) {
+        userService.createToken(email);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/reset")
+    public ResponseEntity<User> resetPassword(@RequestBody ResetPassword resetPassword){
+       return userService.resetPassword(resetPassword).map(ok()).orElseGet(notFound());
     }
 
 }
