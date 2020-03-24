@@ -65,7 +65,11 @@ public class OrderServiceUnitTest {
     @Test
     public void gettingOrder() {
         User user = new User();
-        given(orderRepository.findById(any())).willReturn(Optional.of(new Order()));
+        List<Order> orders = new ArrayList<>();
+        orders.add(new Order());
+        user.setOrders(orders);
+        given(userRepository.findByEmail(any())).willReturn(user);
+        given(orderRepository.findById(any())).willReturn(Optional.of(user.getOrders().get(0)));
         Assertions.assertTrue(orderService.gettingOrder((long) 1).isPresent());
     }
 }

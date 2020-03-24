@@ -5,6 +5,8 @@ import elision.paymentrequestapi.paymentrequestapi.dto.OrderInComingDto;
 import elision.paymentrequestapi.paymentrequestapi.dto.OrderOutGoingDto;
 import elision.paymentrequestapi.paymentrequestapi.mapper.OrderMapper;
 import elision.paymentrequestapi.paymentrequestapi.model.Order;
+import elision.paymentrequestapi.paymentrequestapi.model.Session;
+import elision.paymentrequestapi.paymentrequestapi.model.User;
 import elision.paymentrequestapi.paymentrequestapi.repository.OrderRepository;
 import elision.paymentrequestapi.paymentrequestapi.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -34,17 +36,20 @@ public class OrderService {
         order.setUsers(userRepository.findByEmail(email));
         order.setCreatedAt(Date.valueOf(LocalDate.now()).toString());
         Order savedOrder = orderRepository.save(order);
-        if(savedOrder != null){
+        if (savedOrder != null) {
 //            emailGoogleService.sendSimpleMessage(email, "Order demo", "Your purchase was accepted, thank you for your trust. We will be packaging your product soon.");
         }
         return Optional.ofNullable(savedOrder);
     }
 
-    public Optional<List<OrderOutGoingDto>> gettingOrders(String email){
-       return Optional.ofNullable(OrderMapper.INSTANCE.orderToOrderDto(userRepository.findByEmail(email).getOrders()));
+    public Optional<List<OrderOutGoingDto>> gettingOrders(String email) {
+        return Optional.ofNullable(OrderMapper.INSTANCE.orderToOrderDto(userRepository.findByEmail(email).getOrders()));
     }
 
-    public Optional<OrderOutGoingDto> gettingOrder(Long id){
-        return Optional.ofNullable(OrderMapper.INSTANCE.orderToOutgoingOrder(orderRepository.findById(id)));
+    public Optional<OrderOutGoingDto> gettingOrder(Long id) {
+        if (userRepository.findByEmail(Session.getUsername()).getOrders().contains(orderRepository.findById(id).get())) {
+            return Optional.ofNullable(OrderMapper.INSTANCE.orderToOutgoingOrder(orderRepository.findById(id)));
+        }
+        return Optional.of(new OrderOutGoingDto());
     }
 }
