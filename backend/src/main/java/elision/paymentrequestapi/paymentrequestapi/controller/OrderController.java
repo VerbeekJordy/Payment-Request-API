@@ -29,7 +29,14 @@ public class OrderController {
 
     @GetMapping
     public ResponseEntity<List<OrderOutGoingDto>> getOrdersByLoggedInUser() {
-        return orderService.gettingOrder(Session.getUsername())
+        return orderService.gettingOrders(Session.getUsername())
+                .map(ok())
+                .orElseGet(notFound());
+    }
+
+    @GetMapping(value = "{id}")
+    public ResponseEntity<OrderOutGoingDto> getOrderByOrderId(@PathVariable("id") long id) {
+        return orderService.gettingOrder(id)
                 .map(ok())
                 .orElseGet(notFound());
     }

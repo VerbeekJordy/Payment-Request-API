@@ -40,7 +40,11 @@ public class OrderService {
         return Optional.ofNullable(savedOrder);
     }
 
-    public Optional<List<OrderOutGoingDto>> gettingOrder(String email){
+    public Optional<List<OrderOutGoingDto>> gettingOrders(String email){
        return Optional.ofNullable(OrderMapper.INSTANCE.orderToOrderDto(userRepository.findByEmail(email).getOrders()));
+    }
+
+    public Optional<OrderOutGoingDto> gettingOrder(Long id){
+        return Optional.ofNullable(OrderMapper.INSTANCE.orderToOutgoingOrder(orderRepository.findById(id)));
     }
 }

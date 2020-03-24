@@ -28,6 +28,7 @@ import { OrderHistoryComponent } from './components/order-history/order-history.
 import { OrderComponent } from './components/order/order.component';
 import {NgxSpinnerModule} from 'ngx-spinner';
 import { TransactionComponent } from './components/transaction/transaction.component';
+import { OrderDetailComponent } from './components/order-detail/order-detail.component';
 
 
 
@@ -48,7 +49,8 @@ import { TransactionComponent } from './components/transaction/transaction.compo
     ResetComponent,
     OrderHistoryComponent,
     OrderComponent,
-    TransactionComponent
+    TransactionComponent,
+    OrderDetailComponent
   ],
   imports: [
     MatMenuModule,

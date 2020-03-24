@@ -18,6 +18,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -29,7 +30,8 @@ public class OrderServiceUnitTest {
 
     @MockBean
     private UserRepository userRepository;
-
+    @MockBean
+    private EmailGoogleService emailGoogleService;
     @MockBean
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -54,9 +56,16 @@ public class OrderServiceUnitTest {
     }
 
     @Test
-    public void gettingOrder(){
+    public void gettingOrders() {
         User user = new User();
         given(userRepository.findByEmail(anyString())).willReturn(user);
-        Assertions.assertTrue(orderService.gettingOrder("").isPresent());
+        Assertions.assertTrue(orderService.gettingOrders("").isPresent());
+    }
+
+    @Test
+    public void gettingOrder() {
+        User user = new User();
+        given(orderRepository.findById(any())).willReturn(Optional.of(new Order()));
+        Assertions.assertTrue(orderService.gettingOrder((long) 1).isPresent());
     }
 }

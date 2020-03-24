@@ -10,6 +10,7 @@ import {ResetRequestComponent} from '../components/reset-request/reset-request.c
 import {ResetComponent} from '../components/reset/reset.component';
 import {OrderHistoryComponent} from '../components/order-history/order-history.component';
 import {TransactionComponent} from '../components/transaction/transaction.component';
+import {OrderDetailComponent} from '../components/order-detail/order-detail.component';
 
 
 const routes: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path: 'recover', component: ResetRequestComponent},
   {path: 'reset/:guid', component: ResetComponent},
   {path: 'orders', component: OrderHistoryComponent},
+  {path: 'orders/detail/:id', component: OrderDetailComponent},
   {path: 'transaction', component: TransactionComponent},
   {path: '**', redirectTo: '/home', pathMatch: 'full'}
 
