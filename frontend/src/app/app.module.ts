@@ -25,7 +25,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ResetRequestComponent } from './components/reset-request/reset-request.component';
 import { ResetComponent } from './components/reset/reset.component';
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
-import { OrderComponent } from './order/order.component';
+import { OrderComponent } from './components/order/order.component';
 import {NgxSpinnerModule} from 'ngx-spinner';
 import { TransactionComponent } from './components/transaction/transaction.component';
 

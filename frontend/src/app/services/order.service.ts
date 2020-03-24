@@ -27,9 +27,7 @@ export class OrderService {
 
   parseData(json: any): Order[] {
     return Object.keys(json).map(key => {
-      const order = new Order(json[key].products);
-      let test: Product;
-      order.products.forEach(product => test = product);
+      const order = new Order(json[key].products, json[key].createdAt, json[key].id);
       return order;
     });
   }

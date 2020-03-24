@@ -9,6 +9,8 @@ import elision.paymentrequestapi.paymentrequestapi.repository.OrderRepository;
 import elision.paymentrequestapi.paymentrequestapi.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +32,7 @@ public class OrderService {
         Order order = new Order();
         order.setProducts(stringToProductConverter.stringToProduct(orderInComingDto));
         order.setUsers(userRepository.findByEmail(email));
+        order.setCreatedAt(Date.valueOf(LocalDate.now()).toString());
         Order savedOrder = orderRepository.save(order);
         if(savedOrder != null){
 //            emailGoogleService.sendSimpleMessage(email, "Order demo", "Your purchase was accepted, thank you for your trust. We will be packaging your product soon.");
