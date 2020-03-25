@@ -20,6 +20,6 @@ export class ResetService {
     return this.http
       .post<ResetModel>(this.BASE_API_URL + 'reset',
         resetModel
-      ).subscribe();
+      );
   }
 }
