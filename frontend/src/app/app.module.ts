@@ -14,11 +14,9 @@ import {RegularCheckoutComponent} from './components/regular-checkout/regular-ch
 import {ProductService} from './services/product.service';
 import {JwtInterceptor} from './helpers/jwt.interceptor';
 import {AuthGuard} from './helpers/auth.guard';
-import {LoginComponent} from './components/login/login.component';
 import {ToastrModule} from 'ngx-toastr';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MDBBootstrapModule} from 'angular-bootstrap-md';
-import {OverviewMenuComponent} from './components/overview-menu/overview-menu.component';
 import {MatMenuModule, MatButtonModule} from '@angular/material';
 import { LogoutComponent } from './components/logout/logout.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -29,6 +27,12 @@ import { OrderComponent } from './components/order/order.component';
 import {NgxSpinnerModule} from 'ngx-spinner';
 import { TransactionComponent } from './components/transaction/transaction.component';
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
+import {LoginViewComponent} from './components/login-view/login-view.component';
+import {ErrorInterceptor} from './helpers/error.interceptor';
+import {CommonModule} from '@angular/common';
+import {StorageServiceModule} from 'ngx-webstorage-service';
+import {NgSelectModule} from '@ng-select/ng-select';
+import {ClipboardModule} from 'ngx-clipboard';
 
 
 
@@ -41,8 +45,6 @@ import { OrderDetailComponent } from './components/order-detail/order-detail.com
     CartComponent,
     ConfirmPaymentComponent,
     RegularCheckoutComponent,
-    LoginComponent,
-    OverviewMenuComponent,
     LogoutComponent,
     RegisterComponent,
     ResetRequestComponent,
@@ -50,7 +52,8 @@ import { OrderDetailComponent } from './components/order-detail/order-detail.com
     OrderHistoryComponent,
     OrderComponent,
     TransactionComponent,
-    OrderDetailComponent
+    OrderDetailComponent,
+    LoginViewComponent
   ],
   imports: [
     MatMenuModule,
@@ -64,11 +67,17 @@ import { OrderDetailComponent } from './components/order-detail/order-detail.com
     BrowserAnimationsModule,
     MDBBootstrapModule.forRoot(),
     NgxSpinnerModule,
+    CommonModule,
+    StorageServiceModule,
+    NgSelectModule,
+    ClipboardModule,
+    ClipboardModule
   ],
   providers: [ProductService,
     JwtInterceptor,
     AuthGuard,
-    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

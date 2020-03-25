@@ -16,4 +16,6 @@ public interface OrderMapper {
     List<OrderOutGoingDto> orderToOrderDto(List<Order> order);
 
     OrderOutGoingDto orderToOutgoingOrder(Optional<Order> order);
+
+    OrderOutGoingDto orderToOutgoingOrder(Order order);
 }

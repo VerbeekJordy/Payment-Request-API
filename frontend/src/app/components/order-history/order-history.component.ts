@@ -13,7 +13,6 @@ export class OrderHistoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.orderService.getOrdersBySessionUserList().subscribe(data => this.orders = data);
-    this.orderService.getOrdersBySessionUserList().subscribe(data => console.log(data));
   }
 
 }

@@ -3,7 +3,6 @@ import {Routes, RouterModule} from '@angular/router';
 import {GiftListComponent} from '../components/gift-list/gift-list.component';
 import {ConfirmPaymentComponent} from '../components/confirm-payment/confirm-payment.component';
 import {RegularCheckoutComponent} from '../components/regular-checkout/regular-checkout.component';
-import {LoginComponent} from '../components/login/login.component';
 import {LogoutComponent} from '../components/logout/logout.component';
 import {RegisterComponent} from '../components/register/register.component';
 import {ResetRequestComponent} from '../components/reset-request/reset-request.component';
@@ -11,6 +10,7 @@ import {ResetComponent} from '../components/reset/reset.component';
 import {OrderHistoryComponent} from '../components/order-history/order-history.component';
 import {TransactionComponent} from '../components/transaction/transaction.component';
 import {OrderDetailComponent} from '../components/order-detail/order-detail.component';
+import {LoginViewComponent} from '../components/login-view/login-view.component';
 
 
 const routes: Routes = [
@@ -18,7 +18,7 @@ const routes: Routes = [
   {path: 'home', component: GiftListComponent},
   {path: 'confirmation', component: ConfirmPaymentComponent},
   {path: 'checkout', component: RegularCheckoutComponent},
-  {path: 'login', component: LoginComponent},
+  {path: 'login', component: LoginViewComponent},
   {path: 'logout', component: LogoutComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'recover', component: ResetRequestComponent},

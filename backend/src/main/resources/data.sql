@@ -1,8 +1,8 @@
 INSERT INTO `products` (`sku_id`, `image_url`, `price`, `title_en`, `title_nl`) VALUES
-('0', 'https://image.coolblue.be/max/500x500/products/1392099', '110', 'monitor', 'scherm'),
+('0', 'https://image.coolblue.be/max/500x500/products/1392099', '110', 'Monitor', 'Scherm'),
 ('1', 'https://image.coolblue.be/max/500x500/products/1387901', '2200', 'Macbook', 'Macbook'),
 ('2', 'https://image.coolblue.be/max/500x500/products/1386697', '599', 'HP laptop', 'HP laptop'),
-('3', 'https://image.coolblue.be/max/500x500/products/1389773', '59', 'mouse', 'muis'),
+('3', 'https://image.coolblue.be/max/500x500/products/1389773', '59', 'Mouse', 'Muis'),
 ('4', 'https://image.coolblue.be/max/500x500/products/1382318', '89', 'Headset', 'Headset'),
 ('5', 'https://image.coolblue.be/max/500x500/products/1388600', '1499', 'HP Pavilion All', 'HP Pavilion All');
 

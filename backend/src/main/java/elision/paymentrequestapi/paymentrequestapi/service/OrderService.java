@@ -47,8 +47,12 @@ public class OrderService {
     }
 
     public Optional<OrderOutGoingDto> gettingOrder(Long id) {
+       User user =  userRepository.findByEmail(Session.getUsername());
+       List<Order> orders = user.getOrders();
+       Order order = orderRepository.findById(id).get();
+       boolean test = orders.contains(order);
         if (userRepository.findByEmail(Session.getUsername()).getOrders().contains(orderRepository.findById(id).get())) {
-            return Optional.ofNullable(OrderMapper.INSTANCE.orderToOutgoingOrder(orderRepository.findById(id)));
+            return Optional.ofNullable(OrderMapper.INSTANCE.orderToOutgoingOrder(orderRepository.findById(id).get()));
         }
         return Optional.of(new OrderOutGoingDto());
     }
