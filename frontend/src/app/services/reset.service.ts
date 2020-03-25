@@ -13,7 +13,7 @@ export class ResetService {
     return this.http
       .post<string>(this.BASE_API_URL + 'token',
         email
-      ).subscribe();
+      );
   }
 
   resetPassword(resetModel: ResetModel) {

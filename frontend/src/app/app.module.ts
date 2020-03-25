@@ -20,7 +20,6 @@ import {MDBBootstrapModule} from 'angular-bootstrap-md';
 import {MatMenuModule, MatButtonModule} from '@angular/material';
 import { LogoutComponent } from './components/logout/logout.component';
 import { RegisterComponent } from './components/register/register.component';
-import { ResetRequestComponent } from './components/reset-request/reset-request.component';
 import { ResetComponent } from './components/reset/reset.component';
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
 import { OrderComponent } from './components/order/order.component';
@@ -33,6 +32,7 @@ import {CommonModule} from '@angular/common';
 import {StorageServiceModule} from 'ngx-webstorage-service';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {ClipboardModule} from 'ngx-clipboard';
+import {ResetPasswordViewComponent} from './components/reset-password-view/reset-password-view.component';
 
 
 
@@ -47,13 +47,13 @@ import {ClipboardModule} from 'ngx-clipboard';
     RegularCheckoutComponent,
     LogoutComponent,
     RegisterComponent,
-    ResetRequestComponent,
     ResetComponent,
     OrderHistoryComponent,
     OrderComponent,
     TransactionComponent,
     OrderDetailComponent,
-    LoginViewComponent
+    LoginViewComponent,
+    ResetPasswordViewComponent
   ],
   imports: [
     MatMenuModule,
