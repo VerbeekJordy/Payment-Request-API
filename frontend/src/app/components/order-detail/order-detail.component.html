@@ -1,7 +1,6 @@
-<button (click)="quickBuyClicked()">Opnieuw bestellen</button>
-<hr>
-<div>
+<div id="item">
   <h1>Besteld:</h1>
   <app-order-item *ngFor="let product of products" [product]="product"></app-order-item>
-</div>
 
+</div>
+<button (click)="quickBuyClicked()">Opnieuw bestellen</button>

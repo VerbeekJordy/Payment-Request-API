@@ -1,12 +1,13 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
   public currentUser: string;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.currentUser = localStorage.getItem('currentUser');
   }
 
@@ -49,6 +50,7 @@ export class AuthenticationService {
     localStorage.removeItem('currentUser');
     localStorage.removeItem(('email'));
     this.currentUser = null;
+    this.router.navigateByUrl('/home');
   }
 
   getRoleUrl(role: string): string {

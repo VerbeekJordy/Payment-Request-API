@@ -1,7 +1,14 @@
-div {
+#item {
   width: 80%;
   margin: 0 auto;
   margin-left: 13%;
+}
+section{
+  width: 100%;
+}
+h3{
+  width: 200px;
+  margin: 0 auto;
 }
 
 button {
@@ -13,6 +20,8 @@ button {
   text-align: center;
   cursor: pointer;
   font-size: 18px;
+  width: 100%;
+  margin-top: 20px;
 }
 
 @media only screen and (min-width: 1000px) {
@@ -22,8 +31,11 @@ button {
 }
 
 @media only screen and (max-width: 1000px) {
-  div {
+  #item {
+    width: 100%;
     margin: 0 auto;
-    margin-right: 15%;
+    margin-left: 1%;
   }
+
 }
+

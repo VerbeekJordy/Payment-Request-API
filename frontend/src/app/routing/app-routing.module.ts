@@ -11,6 +11,8 @@ import {LoginViewComponent} from '../components/login-view/login-view.component'
 import {ResetPasswordViewComponent} from '../components/reset-password-view/reset-password-view.component';
 import {ResetPasswordEffectiveComponent} from '../components/reset-password-effective/reset-password-effective.component';
 import {RegisterViewComponent} from '../components/register-view/register-view.component';
+import {AuthGuard} from '../helpers/auth.guard';
+import {Role} from '../models/enums/role';
 
 
 const routes: Routes = [
@@ -23,8 +25,18 @@ const routes: Routes = [
   {path: 'register', component: RegisterViewComponent},
   {path: 'recover', component: ResetPasswordViewComponent},
   {path: 'reset/:guid', component: ResetPasswordEffectiveComponent},
-  {path: 'orders', component: OrderHistoryComponent},
-  {path: 'orders/detail/:id', component: OrderDetailComponent},
+  {
+    path: 'orders',
+    component: OrderHistoryComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Customer] }
+  },
+  {
+    path: 'orders/detail/:id',
+    component: OrderDetailComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Customer] }
+  },
   {path: 'transaction', component: TransactionComponent},
   {path: '**', redirectTo: '/home', pathMatch: 'full'}
 

@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {Product} from '../../models/product.model';
 import {OrderService} from '../../services/order.service';
 import {OrderConverter} from '../../converters/order.converter';
+import {PaymentDto} from '../../models/payment.model';
 
 
 @Component({
@@ -185,9 +186,8 @@ export class CartComponent implements OnInit {
     window.setTimeout(() => {
       instrumentResponse.complete('success')
         .then(() => {
-          this.orderService.addOrder(this.converter.productToStringArray(this.products));
-          console.log(instrumentResponse.methodName);
-          const test = this.instrumentToJsonString(instrumentResponse.methodName);
+          const payment = new PaymentDto(instrumentResponse.methodName);
+          this.orderService.addOrder(this.converter.productToStringArray(this.products), payment);
         })
         .catch((err) => {
 
@@ -205,18 +205,7 @@ export class CartComponent implements OnInit {
     console.log(instrument.payerName);
     details.cardNumber = 'XXXX-XXXX-XXXX-' + details.cardNumber.substr(12);
     details.cardSecurityCode = '***';
-
-
-    this.orderService.addOrder(this.converter.productToStringArray(this.products));
-
     return details;
-    // return JSON.stringify({
-    //   methodName: instrument.methodName,
-    //   details,
-    //   payerName: instrument.payerName,
-    //   payerPhone: instrument.payerPhone,
-    //   payerEmail: instrument.payerEmail,
-    // }, undefined, 2);
   }
 }
 

@@ -23,13 +23,13 @@ describe('AppComponent', () => {
   it(`should have as title 'Payment Request Api Elision'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('Payment Request Api Elision');
+    expect(app.title).toEqual('PaymentDto Request Api Elision');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('Payment Request Api Elision app is running!');
+    expect(compiled.querySelector('.content span').textContent).toContain('PaymentDto Request Api Elision app is running!');
   });
 });

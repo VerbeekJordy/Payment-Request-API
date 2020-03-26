@@ -50,7 +50,7 @@ public class OrderService {
     }
 
     public Optional<List<OrderOutGoingDto>> gettingOrders(String email) {
-        return Optional.ofNullable(OrderMapper.INSTANCE.orderToOrderDto(userRepository.findByEmail(email).getOrders()));
+        return Optional.ofNullable(orderToOrderOutgoingDtoConverter.orderListToListOrderOutgoingDto(userRepository.findByEmail(email).getOrders()));
     }
 
     public Optional<OrderOutGoingDto> gettingOrder(Long id) {
