@@ -8,6 +8,7 @@ public class OrderOutGoingDto {
     private String id;
     private List<Product> products;
     private String createdAt;
+    private PaymentDto paymentDto;
 
     public List<Product> getProducts() {
         return products;
@@ -23,6 +24,14 @@ public class OrderOutGoingDto {
 
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public PaymentDto getPaymentDto() {
+        return paymentDto;
+    }
+
+    public void setPaymentDto(PaymentDto paymentDto) {
+        this.paymentDto = paymentDto;
     }
 
     public String getId() {

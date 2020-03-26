@@ -35,6 +35,9 @@ public class Order {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private User users;
 
+    @OneToOne(cascade = CascadeType.PERSIST)
+    private Payment payment;
+
     public Order() {
     }
 
@@ -68,5 +71,13 @@ public class Order {
 
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 }

@@ -186,9 +186,8 @@ export class CartComponent implements OnInit {
       instrumentResponse.complete('success')
         .then(() => {
           this.orderService.addOrder(this.converter.productToStringArray(this.products));
-          console.log(this.products);
-          document.getElementById('result').innerHTML =
-            this.instrumentToJsonString(instrumentResponse);
+          console.log(instrumentResponse.methodName);
+          const test = this.instrumentToJsonString(instrumentResponse.methodName);
         })
         .catch((err) => {
 
@@ -202,21 +201,22 @@ export class CartComponent implements OnInit {
   instrumentToJsonString(instrument) {
     const details = instrument.details;
     console.log(instrument);
-    console.log(instrument.details.cardSecurityCode);
-    console.log(instrument.details.cardNumber);
-    console.log(instrument.amount);
     console.log(instrument.methodName);
     console.log(instrument.payerName);
     details.cardNumber = 'XXXX-XXXX-XXXX-' + details.cardNumber.substr(12);
     details.cardSecurityCode = '***';
 
-    return JSON.stringify({
-      methodName: instrument.methodName,
-      details,
-      payerName: instrument.payerName,
-      payerPhone: instrument.payerPhone,
-      payerEmail: instrument.payerEmail,
-    }, undefined, 2);
+
+    this.orderService.addOrder(this.converter.productToStringArray(this.products));
+
+    return details;
+    // return JSON.stringify({
+    //   methodName: instrument.methodName,
+    //   details,
+    //   payerName: instrument.payerName,
+    //   payerPhone: instrument.payerPhone,
+    //   payerEmail: instrument.payerEmail,
+    // }, undefined, 2);
   }
 }
 
