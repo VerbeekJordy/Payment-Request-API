@@ -1,7 +1,0 @@
-<form [formGroup]="form" (ngSubmit)="submit(form)">
-  <input type="text" name="email" placeholder="email" formControlName="email">
-
-  <p *ngIf="form.get('email').hasError('required')" class="error">Required.</p>
-
-  <button type="submit" [disabled]="form.invalid">Reset</button>
-</form>

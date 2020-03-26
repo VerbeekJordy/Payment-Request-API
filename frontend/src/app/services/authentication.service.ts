@@ -24,7 +24,7 @@ export class AuthenticationService {
         email,
         password,
         fullName
-      }).subscribe();
+      });
   }
 
   login(email: string, password: string) {

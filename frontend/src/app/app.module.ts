@@ -14,20 +14,26 @@ import {RegularCheckoutComponent} from './components/regular-checkout/regular-ch
 import {ProductService} from './services/product.service';
 import {JwtInterceptor} from './helpers/jwt.interceptor';
 import {AuthGuard} from './helpers/auth.guard';
-import {LoginComponent} from './components/login/login.component';
 import {ToastrModule} from 'ngx-toastr';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MDBBootstrapModule} from 'angular-bootstrap-md';
-import {OverviewMenuComponent} from './components/overview-menu/overview-menu.component';
 import {MatMenuModule, MatButtonModule} from '@angular/material';
 import { LogoutComponent } from './components/logout/logout.component';
-import { RegisterComponent } from './components/register/register.component';
-import { ResetRequestComponent } from './components/reset-request/reset-request.component';
-import { ResetComponent } from './components/reset/reset.component';
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
-import { OrderComponent } from './order/order.component';
+import { OrderComponent } from './components/order/order.component';
 import {NgxSpinnerModule} from 'ngx-spinner';
 import { TransactionComponent } from './components/transaction/transaction.component';
+import { OrderDetailComponent } from './components/order-detail/order-detail.component';
+import {LoginViewComponent} from './components/login-view/login-view.component';
+import {ErrorInterceptor} from './helpers/error.interceptor';
+import {CommonModule} from '@angular/common';
+import {StorageServiceModule} from 'ngx-webstorage-service';
+import {NgSelectModule} from '@ng-select/ng-select';
+import {ClipboardModule} from 'ngx-clipboard';
+import {ResetPasswordViewComponent} from './components/reset-password-view/reset-password-view.component';
+import { ResetPasswordEffectiveComponent } from './components/reset-password-effective/reset-password-effective.component';
+import { RegisterViewComponent } from './components/register-view/register-view.component';
+import { OrderItemComponent } from './components/order-item/order-item.component';
 
 
 
@@ -40,15 +46,16 @@ import { TransactionComponent } from './components/transaction/transaction.compo
     CartComponent,
     ConfirmPaymentComponent,
     RegularCheckoutComponent,
-    LoginComponent,
-    OverviewMenuComponent,
     LogoutComponent,
-    RegisterComponent,
-    ResetRequestComponent,
-    ResetComponent,
     OrderHistoryComponent,
     OrderComponent,
-    TransactionComponent
+    TransactionComponent,
+    OrderDetailComponent,
+    LoginViewComponent,
+    ResetPasswordViewComponent,
+    ResetPasswordEffectiveComponent,
+    RegisterViewComponent,
+    OrderItemComponent
   ],
   imports: [
     MatMenuModule,
@@ -62,11 +69,17 @@ import { TransactionComponent } from './components/transaction/transaction.compo
     BrowserAnimationsModule,
     MDBBootstrapModule.forRoot(),
     NgxSpinnerModule,
+    CommonModule,
+    StorageServiceModule,
+    NgSelectModule,
+    ClipboardModule,
+    ClipboardModule
   ],
   providers: [ProductService,
     JwtInterceptor,
     AuthGuard,
-    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

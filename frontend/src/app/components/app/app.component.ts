@@ -1,4 +1,6 @@
 import {Component, HostListener, OnInit} from '@angular/core';
+import {AuthenticationService} from '../../services/authentication.service';
+import {NavigationEnd, Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,15 +8,20 @@ import {Component, HostListener, OnInit} from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'Payment Request Api Elision';
-  innerWidth: number;
+  loggedIn = false;
 
-  ngOnInit() {
-    this.innerWidth = window.innerWidth;
+  constructor(private authenticationService: AuthenticationService, private router: Router) {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        if (this.authenticationService.currentUser != null) {
+          this.loggedIn = true;
+        } else {
+          this.loggedIn = false;
+        }
+      }
+    });
   }
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    this.innerWidth = window.innerWidth;
+  ngOnInit() {
   }
 }

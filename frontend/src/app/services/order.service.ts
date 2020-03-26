@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Product} from '../models/product.model';
 import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 import {Order} from '../models/order.model';
 
 @Injectable({providedIn: 'root'})
@@ -25,11 +24,14 @@ export class OrderService {
       .pipe(map(res => this.parseData(res)));
   }
 
+  getOrderById(orderId: number): Observable<Order> {
+    return this.http
+      .get<Order>(this.BASE_API_URL + '/' + orderId);
+  }
+
   parseData(json: any): Order[] {
     return Object.keys(json).map(key => {
-      const order = new Order(json[key].products);
-      let test: Product;
-      order.products.forEach(product => test = product);
+      const order = new Order(json[key].products, json[key].createdAt, json[key].id);
       return order;
     });
   }

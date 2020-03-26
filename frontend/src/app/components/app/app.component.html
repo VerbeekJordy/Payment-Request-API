@@ -1,7 +1,24 @@
-<nav>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a [routerLink]="['/home']"><img id="elisionIcon" src="../../../assets/ELI_logo.png" alt="Home"></a>
-  <h1 *ngIf="innerWidth > 1000">Payment Request Api Demo</h1>
-  <app-overview-menu id="loginButton"></app-overview-menu>
-</nav>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li *ngIf="!loggedIn" class="nav-item active text-right">
+        <a class="nav-link" routerLink="/login">Log In <span class="sr-only">(current)</span></a>
+      </li>
+      <li *ngIf="!loggedIn" class="nav-item active text-right">
+        <a class="nav-link" routerLink="/register">Sign Up</a>
+      </li>
+      <li *ngIf="loggedIn" class="nav-item active text-right">
+        <a class="nav-link" routerLink="/orders">Orders</a>
+      </li>
+      <li *ngIf="loggedIn" class="nav-item active text-right">
+        <a class="nav-link" routerLink="/logout">Log Out</a>
+      </li>
+    </ul>
+  </div>
+</nav>
 <router-outlet></router-outlet>

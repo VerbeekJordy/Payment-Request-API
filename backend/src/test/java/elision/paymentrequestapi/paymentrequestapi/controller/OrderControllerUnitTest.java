@@ -3,7 +3,6 @@ package elision.paymentrequestapi.paymentrequestapi.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import elision.paymentrequestapi.paymentrequestapi.dto.OrderInComingDto;
 import elision.paymentrequestapi.paymentrequestapi.dto.OrderOutGoingDto;
-import elision.paymentrequestapi.paymentrequestapi.dto.ProductDto;
 import elision.paymentrequestapi.paymentrequestapi.model.Order;
 import elision.paymentrequestapi.paymentrequestapi.model.Product;
 import elision.paymentrequestapi.paymentrequestapi.service.OrderService;
@@ -44,12 +43,21 @@ public class OrderControllerUnitTest {
         List<OrderOutGoingDto> orderList = new ArrayList<>();
         orderList.add(new OrderOutGoingDto());
 
-        given(orderService.gettingOrder(any())).willReturn(Optional.ofNullable(orderList));
+        given(orderService.gettingOrders(any())).willReturn(Optional.ofNullable(orderList));
 
         mockMvc.perform(get("/order")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(1)));
+    }
+
+    @Test
+    public void getOrder() throws Exception {
+
+        given(orderService.gettingOrder(any())).willReturn(Optional.of(new OrderOutGoingDto()));
+        mockMvc.perform(get("/order/1")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
     }
 
     @Test

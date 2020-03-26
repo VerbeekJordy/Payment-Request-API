@@ -1,0 +1,14 @@
+<article>
+  <section id="leftSection">
+    <div><h1>{{order.createdAt}}</h1></div>
+    <div>Order: <a routerLink="/orders/detail/{{order.id}}">{{order.id}}</a></div>
+    <br>
+    <div>Status:</div>
+  </section>
+  <section id="rightSection" *ngIf="order.products.length <= 2">
+    <div id="item" *ngFor="let product of order.products">
+      <img [src]="product.imageUrl" alt="">
+    </div>
+  </section>
+</article>
+<br>

@@ -67,10 +67,14 @@ public class UserService implements UserDetailsService {
 
     public User save(UserDto userDto) {
         User user = UserMapper.INSTANCE.UserDtoToUser(userDto);
-        Role role = roleService.findRoleByName("USER");
-        user.setRole(role);
-        user.setPassword(bcryptEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+        if (userRepository.findByEmail(user.getEmail()) == null) {
+            Role role = roleService.findRoleByName("USER");
+            user.setRole(role);
+            user.setPassword(bcryptEncoder.encode(user.getPassword()));
+            return userRepository.save(user);
+
+        }
+        return null;
     }
 
     public void createToken(String email) {

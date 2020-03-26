@@ -6,6 +6,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
+import java.util.Optional;
 
 @Mapper
 public interface OrderMapper {
@@ -13,4 +14,8 @@ public interface OrderMapper {
     OrderMapper INSTANCE = Mappers.getMapper(OrderMapper.class);
 
     List<OrderOutGoingDto> orderToOrderDto(List<Order> order);
+
+    OrderOutGoingDto orderToOutgoingOrder(Optional<Order> order);
+
+    OrderOutGoingDto orderToOutgoingOrder(Order order);
 }

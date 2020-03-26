@@ -1,8 +1,0 @@
-<form [formGroup]="form" (ngSubmit)="submit(form)">
-
-  <input type="password" name="password" placeholder="password" formControlName="password">
-
-  <p *ngIf="form.get('password').hasError('required')" class="error">Required.</p>
-
-  <button type="submit" [disabled]="form.invalid">Submit</button>
-</form>

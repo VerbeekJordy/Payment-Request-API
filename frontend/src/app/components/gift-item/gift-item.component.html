@@ -8,6 +8,8 @@
       Kostprijs: {{product.price}} <br/>
     </p>
   </div>
-  <button class="add" (click)="buttonClicked(product)" [ngStyle]="{'width': width + '%'}">Winkelmandje</button>
-  <button class="buyNow" (click)="quickBuyClicked(product)" *ngIf="present">Buy now</button>
+  <div class="btn-group" role="group" aria-label="Basic example">
+    <button class="add" (click)="buttonClicked(product)" [ngStyle]="{'width': width + '%'}">Winkelmandje</button>
+    <button class="buyNow" (click)="quickBuyClicked(product)" *ngIf="present">Buy now</button>
+  </div>
 </div>
