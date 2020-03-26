@@ -33,6 +33,7 @@ import {ClipboardModule} from 'ngx-clipboard';
 import {ResetPasswordViewComponent} from './components/reset-password-view/reset-password-view.component';
 import { ResetPasswordEffectiveComponent } from './components/reset-password-effective/reset-password-effective.component';
 import { RegisterViewComponent } from './components/register-view/register-view.component';
+import { OrderItemComponent } from './components/order-item/order-item.component';
 
 
 
@@ -53,7 +54,8 @@ import { RegisterViewComponent } from './components/register-view/register-view.
     LoginViewComponent,
     ResetPasswordViewComponent,
     ResetPasswordEffectiveComponent,
-    RegisterViewComponent
+    RegisterViewComponent,
+    OrderItemComponent
   ],
   imports: [
     MatMenuModule,
