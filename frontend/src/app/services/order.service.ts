@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
 import {Order} from '../models/order.model';
+import {PaymentDto} from '../models/payment.model';
 
 @Injectable({providedIn: 'root'})
 export class OrderService {
@@ -11,9 +12,10 @@ export class OrderService {
   constructor(private http: HttpClient) {
   }
 
-  addOrder(products: Array<string>) {
+  addOrder(products: Array<string>, paymentDto: PaymentDto) {
     return this.http
       .post<any>(this.BASE_API_URL, {
+        paymentDto,
         products
       }).subscribe();
   }
@@ -31,7 +33,7 @@ export class OrderService {
 
   parseData(json: any): Order[] {
     return Object.keys(json).map(key => {
-      const order = new Order(json[key].products, json[key].createdAt, json[key].id);
+      const order = new Order(json[key].products, json[key].paymentDto, json[key].createdAt, json[key].id);
       return order;
     });
   }

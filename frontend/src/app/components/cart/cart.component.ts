@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {Product} from '../../models/product.model';
 import {OrderService} from '../../services/order.service';
 import {OrderConverter} from '../../converters/order.converter';
+import {PaymentDto} from '../../models/payment.model';
 
 
 @Component({
@@ -185,10 +186,8 @@ export class CartComponent implements OnInit {
     window.setTimeout(() => {
       instrumentResponse.complete('success')
         .then(() => {
-          this.orderService.addOrder(this.converter.productToStringArray(this.products));
-          console.log(this.products);
-          document.getElementById('result').innerHTML =
-            this.instrumentToJsonString(instrumentResponse);
+          const payment = new PaymentDto(instrumentResponse.methodName);
+          this.orderService.addOrder(this.converter.productToStringArray(this.products), payment);
         })
         .catch((err) => {
 
@@ -202,21 +201,11 @@ export class CartComponent implements OnInit {
   instrumentToJsonString(instrument) {
     const details = instrument.details;
     console.log(instrument);
-    console.log(instrument.details.cardSecurityCode);
-    console.log(instrument.details.cardNumber);
-    console.log(instrument.amount);
     console.log(instrument.methodName);
     console.log(instrument.payerName);
     details.cardNumber = 'XXXX-XXXX-XXXX-' + details.cardNumber.substr(12);
     details.cardSecurityCode = '***';
-
-    return JSON.stringify({
-      methodName: instrument.methodName,
-      details,
-      payerName: instrument.payerName,
-      payerPhone: instrument.payerPhone,
-      payerEmail: instrument.payerEmail,
-    }, undefined, 2);
+    return details;
   }
 }
 

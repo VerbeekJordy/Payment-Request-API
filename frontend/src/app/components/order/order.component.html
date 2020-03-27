@@ -3,7 +3,7 @@
     <div><h1>{{order.createdAt}}</h1></div>
     <div>Order: <a routerLink="/orders/detail/{{order.id}}">{{order.id}}</a></div>
     <br>
-    <div>Status:</div>
+    <div>Status: {{order.paymentDto?.paymentStatus}}</div>
   </section>
   <section id="rightSection" *ngIf="order.products.length <= 2">
     <div id="item" *ngFor="let product of order.products">

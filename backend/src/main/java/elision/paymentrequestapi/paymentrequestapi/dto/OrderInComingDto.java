@@ -4,6 +4,14 @@ import java.util.List;
 
 public class OrderInComingDto {
     private List<String> products;
+    private PaymentDto paymentDto;
+
+    public OrderInComingDto() {
+    }
+
+    public OrderInComingDto(List<String> products) {
+        this.products = products;
+    }
 
     public List<String> getProducts() {
         return products;
@@ -13,10 +21,11 @@ public class OrderInComingDto {
         this.products = products;
     }
 
-    public OrderInComingDto() {
+    public PaymentDto getPaymentDto() {
+        return paymentDto;
     }
 
-    public OrderInComingDto(List<String> products) {
-        this.products = products;
+    public void setPaymentDto(PaymentDto paymentDto) {
+        this.paymentDto = paymentDto;
     }
 }
