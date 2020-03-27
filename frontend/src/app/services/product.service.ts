@@ -5,12 +5,13 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
 import {Product} from '../models/product.model';
+import {DbConnection} from '../helpers/database.helper';
 
 @Injectable()
 export class ProductService {
-  BASE_API_URL = 'http://localhost:8080/product/';
+  BASE_API_URL = this.connection.connection + '/product/';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private connection: DbConnection) {
   }
 
   // Api Calls

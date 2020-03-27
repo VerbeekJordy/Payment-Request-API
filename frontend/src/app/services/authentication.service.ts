@@ -2,12 +2,13 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {Router} from '@angular/router';
+import {DbConnection} from '../helpers/database.helper';
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
   public currentUser: string;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private connection: DbConnection) {
     this.currentUser = localStorage.getItem('currentUser');
   }
 
@@ -21,7 +22,7 @@ export class AuthenticationService {
 
   register(email: string, password: string, fullName: string) {
     return this.http
-      .post<any>('http://localhost:8080/register', {
+      .post<any>(this.connection.connection + '/register', {
         email,
         password,
         fullName
@@ -30,7 +31,7 @@ export class AuthenticationService {
 
   login(email: string, password: string) {
     return this.http
-      .post<any>('http://localhost:8080/login', {
+      .post<any>(this.connection.connection + '/login', {
         email,
         password
       })
