@@ -1,12 +1,13 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ResetModel} from '../models/reset.model';
+import {DbConnection} from '../helpers/database.helper';
 
 @Injectable({providedIn: 'root'})
 export class ResetService {
-  BASE_API_URL = 'http://localhost:8080/';
+  BASE_API_URL = this.connection.connection + '/';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private connection: DbConnection) {
   }
 
   resetPasswordByToken(email: string) {

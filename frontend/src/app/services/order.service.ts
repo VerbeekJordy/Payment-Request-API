@@ -4,12 +4,13 @@ import {Observable} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
 import {Order} from '../models/order.model';
 import {PaymentDto} from '../models/payment.model';
+import {DbConnection} from '../helpers/database.helper';
 
 @Injectable({providedIn: 'root'})
 export class OrderService {
-  BASE_API_URL = 'http://localhost:8080/order';
+  BASE_API_URL = this.connection.connection + '/order';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private connection: DbConnection) {
   }
 
   addOrder(products: Array<string>, paymentDto: PaymentDto) {
