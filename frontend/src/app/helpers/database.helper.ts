@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class DbConnection {
 // tslint:disable-next-line:variable-name
 private _connection = 'https://paymentrequestapi.elision.zone';
