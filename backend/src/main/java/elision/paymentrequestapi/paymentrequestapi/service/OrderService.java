@@ -4,7 +4,6 @@ import elision.paymentrequestapi.paymentrequestapi.converter.OrderToOrderOutgoin
 import elision.paymentrequestapi.paymentrequestapi.converter.StringToProductConverter;
 import elision.paymentrequestapi.paymentrequestapi.dto.OrderInComingDto;
 import elision.paymentrequestapi.paymentrequestapi.dto.OrderOutGoingDto;
-import elision.paymentrequestapi.paymentrequestapi.mapper.OrderMapper;
 import elision.paymentrequestapi.paymentrequestapi.mapper.PaymentMapper;
 import elision.paymentrequestapi.paymentrequestapi.model.Order;
 import elision.paymentrequestapi.paymentrequestapi.model.Payment;
@@ -44,7 +43,7 @@ public class OrderService {
         order.setCreatedAt(Date.valueOf(LocalDate.now()).toString());
         Order savedOrder = orderRepository.save(order);
         if (savedOrder != null) {
-//            emailGoogleService.sendSimpleMessage(email, "Order demo", "Your purchase was accepted, thank you for your trust. We will be packaging your product soon.");
+            emailGoogleService.sendSimpleMessage(email, "Order demo", "Your purchase was accepted, thank you for your trust. We will be packaging your product soon.");
         }
         return Optional.ofNullable(savedOrder);
     }
